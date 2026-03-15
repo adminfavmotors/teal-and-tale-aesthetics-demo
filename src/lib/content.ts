@@ -151,6 +151,22 @@ const contentSchema = z.object({
         description: localizedStringSchema,
       }),
     ),
+    calendar: z.object({
+      visibleDays: z.number(),
+      closedWeekdays: z.array(z.number()),
+      blockedDayOffsets: z.array(z.number()),
+      timeSlots: z.array(z.string()),
+      busySlotsByDayOffset: z.record(z.string(), z.array(z.string())),
+      labels: z.object({
+        selectDate: localizedStringSchema,
+        selectTime: localizedStringSchema,
+        selectedDate: localizedStringSchema,
+        selectedTime: localizedStringSchema,
+        unavailable: localizedStringSchema,
+        fullyBooked: localizedStringSchema,
+        available: localizedStringSchema,
+      }),
+    }),
   }),
   faq: z.object({
     eyebrow: localizedStringSchema,

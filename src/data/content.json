@@ -170,11 +170,11 @@
         "en": "Signature gel manicure"
       },
       "shortDescription": {
-        "pl": "Perfekcyjne opracowanie skorek, dopracowany ksztalt i kolor dobrany tak, by wygladal luksusowo w codziennym swietle i na zdjeciach.",
-        "en": "Meticulous cuticle work, refined shaping and a colour selected to look expensive in daylight and in close-up photos."
+        "pl": "Precyzyjne opracowanie skorek, dopracowany ksztalt i kolor, ktory wyglada swiezo w codziennym swietle i na zdjeciach.",
+        "en": "Meticulous cuticle work, refined shaping and a colour that looks polished in daylight and in close-up photos."
       },
       "experienceNote": {
-        "pl": "Najczesciej wybierana pierwsza rezerwacja przed eventem, wyjazdem albo po prostu dla siebie.",
+        "pl": "Najczesciej wybierana pierwsza wizyta przed eventem, wyjazdem albo po prostu dla siebie.",
         "en": "The most requested first appointment before an event, a trip or simply as a reset for yourself."
       },
       "ctaLabel": {
@@ -182,6 +182,286 @@
         "en": "Book manicure"
       },
       "mediaId": "service-manicure"
+    },
+    {
+      "id": "manicure-klasyczny",
+      "category": {
+        "pl": "Paznokcie",
+        "en": "Nails"
+      },
+      "featured": false,
+      "price": 150,
+      "currency": "PLN",
+      "durationMin": 60,
+      "name": {
+        "pl": "Manicure klasyczny",
+        "en": "Classic manicure"
+      },
+      "shortDescription": {
+        "pl": "Naturalny, czysty efekt z pielegnacja skorek i subtelnym wykonczeniem bez hybrydy.",
+        "en": "A natural polished finish with cuticle care and a clean non-gel result."
+      },
+      "experienceNote": {
+        "pl": "Idealny, jesli lubisz lekki, zadbany look i szybka wizyte.",
+        "en": "Ideal when you prefer a lighter look and a shorter appointment."
+      },
+      "ctaLabel": {
+        "pl": "Wybierz usluge",
+        "en": "Choose service"
+      },
+      "mediaId": "service-manicure"
+    },
+    {
+      "id": "manicure-japonski",
+      "category": {
+        "pl": "Paznokcie",
+        "en": "Nails"
+      },
+      "featured": false,
+      "price": 165,
+      "currency": "PLN",
+      "durationMin": 55,
+      "name": {
+        "pl": "Manicure japonski",
+        "en": "Japanese manicure"
+      },
+      "shortDescription": {
+        "pl": "Wzmacnia naturalna plytke i daje zdrowy, satynowy polysk bez koloru.",
+        "en": "Strengthens the natural nail and leaves a healthy satin shine without colour."
+      },
+      "experienceNote": {
+        "pl": "Dobrze sprawdza sie po przerwie od stylizacji lub przed sezonem regeneracji.",
+        "en": "A strong choice after a styling break or as a regeneration reset."
+      },
+      "ctaLabel": {
+        "pl": "Zarezerwuj",
+        "en": "Book now"
+      },
+      "mediaId": "service-manicure"
+    },
+    {
+      "id": "zel-na-naturalnej-plytce",
+      "category": {
+        "pl": "Paznokcie",
+        "en": "Nails"
+      },
+      "featured": false,
+      "price": 240,
+      "currency": "PLN",
+      "durationMin": 110,
+      "name": {
+        "pl": "Zel na naturalnej plytce",
+        "en": "Builder gel on natural nails"
+      },
+      "shortDescription": {
+        "pl": "Delikatne wzmocnienie naturalnej plytki dla bardziej trwalego, gladkiego efektu.",
+        "en": "A strengthening builder base for a smoother and longer-wearing natural nail finish."
+      },
+      "experienceNote": {
+        "pl": "Dla klientek, ktore chca trwalosci bez efektu ciezkiej stylizacji.",
+        "en": "For guests who want lasting structure without a heavy look."
+      },
+      "ctaLabel": {
+        "pl": "Wybierz usluge",
+        "en": "Choose service"
+      },
+      "mediaId": "service-manicure"
+    },
+    {
+      "id": "uzupelnienie-zelu",
+      "category": {
+        "pl": "Paznokcie",
+        "en": "Nails"
+      },
+      "featured": false,
+      "price": 260,
+      "currency": "PLN",
+      "durationMin": 120,
+      "name": {
+        "pl": "Uzupelnienie zelu + kolor",
+        "en": "Gel refill + colour"
+      },
+      "shortDescription": {
+        "pl": "Odnowienie ksztaltu i koloru z zachowaniem lekkiej, premium linii stylizacji.",
+        "en": "A shape and colour refresh that keeps the styling balanced and premium."
+      },
+      "experienceNote": {
+        "pl": "Najlepsze dla stalych gosci wracajacych co 3-4 tygodnie.",
+        "en": "Best for regular guests returning every three to four weeks."
+      },
+      "ctaLabel": {
+        "pl": "Umow uzupelnienie",
+        "en": "Book refill"
+      },
+      "mediaId": "service-manicure"
+    },
+    {
+      "id": "sciagniecie-z-manicure",
+      "category": {
+        "pl": "Paznokcie",
+        "en": "Nails"
+      },
+      "featured": false,
+      "price": 170,
+      "currency": "PLN",
+      "durationMin": 75,
+      "name": {
+        "pl": "Sciagniecie poprzedniej stylizacji + manicure",
+        "en": "Removal + fresh manicure"
+      },
+      "shortDescription": {
+        "pl": "Bezpieczne usuniecie poprzedniej masy i nowy, czysty manicure w jednej wizycie.",
+        "en": "Safe removal of the previous styling followed by a fresh polished manicure."
+      },
+      "experienceNote": {
+        "pl": "Dobrze sprawdza sie po zmianie salonu albo po dluzszej przerwie.",
+        "en": "Ideal after changing salons or returning after a longer break."
+      },
+      "ctaLabel": {
+        "pl": "Zarezerwuj",
+        "en": "Book now"
+      },
+      "mediaId": "service-manicure"
+    },
+    {
+      "id": "pedicure-hybrydowy",
+      "category": {
+        "pl": "Pedicure",
+        "en": "Pedicure"
+      },
+      "featured": true,
+      "price": 250,
+      "currency": "PLN",
+      "durationMin": 85,
+      "name": {
+        "pl": "Pedicure hybrydowy",
+        "en": "Gel pedicure"
+      },
+      "shortDescription": {
+        "pl": "Opracowanie stop i kolor, ktory wyglada czysto, nowoczesnie i bardzo schludnie.",
+        "en": "Foot care and gel colour with a clean, modern and polished finish."
+      },
+      "experienceNote": {
+        "pl": "Swietny wybor na sezon sandalow, wyjazd albo regularna pielegnacje.",
+        "en": "A strong choice for sandal season, travel or regular maintenance."
+      },
+      "ctaLabel": {
+        "pl": "Dodaj do wizyty",
+        "en": "Add to your visit"
+      },
+      "mediaId": "service-pedicure"
+    },
+    {
+      "id": "pedicure-klasyczny",
+      "category": {
+        "pl": "Pedicure",
+        "en": "Pedicure"
+      },
+      "featured": false,
+      "price": 190,
+      "currency": "PLN",
+      "durationMin": 70,
+      "name": {
+        "pl": "Pedicure klasyczny",
+        "en": "Classic pedicure"
+      },
+      "shortDescription": {
+        "pl": "Naturalnie zadbane stopy z pielegnacja i lekkim, swiezym wykonczeniem.",
+        "en": "A naturally groomed result with focused care and a fresh understated finish."
+      },
+      "experienceNote": {
+        "pl": "Dla klientek, ktore chca czystego efektu bez hybrydy.",
+        "en": "For guests who prefer a clean result without gel colour."
+      },
+      "ctaLabel": {
+        "pl": "Wybierz usluge",
+        "en": "Choose service"
+      },
+      "mediaId": "service-pedicure"
+    },
+    {
+      "id": "pedicure-spa-premium",
+      "category": {
+        "pl": "Pedicure",
+        "en": "Pedicure"
+      },
+      "featured": true,
+      "price": 290,
+      "currency": "PLN",
+      "durationMin": 95,
+      "name": {
+        "pl": "Pedicure spa z kolorem",
+        "en": "Spa pedicure with colour"
+      },
+      "shortDescription": {
+        "pl": "Peeling, gladkosc, komfort i kolor w bardziej relaksujacej, rytualowej odslonie.",
+        "en": "Peeling, smoothing, comfort and colour in a more ritual-like premium format."
+      },
+      "experienceNote": {
+        "pl": "Idealny duet z manicure przed slubem, wakacjami albo waznym weekendem.",
+        "en": "An ideal pairing with manicure before a wedding, a holiday or an important weekend."
+      },
+      "ctaLabel": {
+        "pl": "Umow pedicure",
+        "en": "Book pedicure"
+      },
+      "mediaId": "service-pedicure"
+    },
+    {
+      "id": "pedicure-express",
+      "category": {
+        "pl": "Pedicure",
+        "en": "Pedicure"
+      },
+      "featured": false,
+      "price": 150,
+      "currency": "PLN",
+      "durationMin": 45,
+      "name": {
+        "pl": "Pedicure express",
+        "en": "Express pedicure"
+      },
+      "shortDescription": {
+        "pl": "Krotsza wizyta skupiona na szybkim odswiezeniu i estetycznym wykonczeniu.",
+        "en": "A shorter appointment focused on a quick refresh and a neat visible result."
+      },
+      "experienceNote": {
+        "pl": "Dobre rozwiazanie, gdy potrzebujesz szybkiego resetu przed wyjazdem.",
+        "en": "A good option when you need a quick reset before travelling."
+      },
+      "ctaLabel": {
+        "pl": "Zarezerwuj",
+        "en": "Book now"
+      },
+      "mediaId": "service-pedicure"
+    },
+    {
+      "id": "strzyzenie-modelowanie",
+      "category": {
+        "pl": "Wlosy",
+        "en": "Hair"
+      },
+      "featured": false,
+      "price": 230,
+      "currency": "PLN",
+      "durationMin": 75,
+      "name": {
+        "pl": "Strzyzenie + modelowanie",
+        "en": "Cut + blow-dry"
+      },
+      "shortDescription": {
+        "pl": "Ciecie dopasowane do gestosci, ruchu i stylu noszenia wlosow z finalnym soft finish.",
+        "en": "A cut tailored to density, movement and styling habits, finished with soft polish."
+      },
+      "experienceNote": {
+        "pl": "Najlepsze, gdy chcesz odswiezyc ksztalt bez zmiany koloru.",
+        "en": "Perfect when you want to refresh the shape without changing the colour."
+      },
+      "ctaLabel": {
+        "pl": "Umow strzyzenie",
+        "en": "Book haircut"
+      },
+      "mediaId": "service-hair"
     },
     {
       "id": "koloryzacja-i-strzyzenie",
@@ -198,72 +478,156 @@
         "en": "Glossy colour + cut"
       },
       "shortDescription": {
-        "pl": "Kolor budowany warstwowo z konsultacja tonu, pielegnacja wygladzajaca i cieciem, ktore nadaje wlosom lekkoosc, ruch i drogi polysk.",
-        "en": "Layered colour work with tone consultation, smoothing care and a cut that gives the hair movement, softness and expensive shine."
+        "pl": "Kolor budowany warstwowo z konsultacja tonu, pielegnacja wygladzajaca i cieciem, ktore nadaje wlosom ruch i drogi polysk.",
+        "en": "Layered colour work with tone consultation, smoothing care and a cut that gives the hair movement and expensive shine."
       },
       "experienceNote": {
-        "pl": "Dla gosci, ktore chca pelnej metamorfozy albo odswiezenia przed sezonem.",
-        "en": "For guests who want a full transformation or a polished seasonal refresh."
+        "pl": "Dla gosci, ktore chca pelnej metamorfozy albo dopracowanego seasonal refresh.",
+        "en": "For guests who want a fuller transformation or a polished seasonal refresh."
       },
       "ctaLabel": {
         "pl": "Zarezerwuj konsultacje",
-        "en": "Book a consultation"
+        "en": "Book consultation"
       },
       "mediaId": "service-hair"
     },
     {
-      "id": "pedicure-hybrydowy",
+      "id": "tonowanie-gloss",
       "category": {
-        "pl": "Pedicure",
-        "en": "Pedicure"
-      },
-      "featured": true,
-      "price": 290,
-      "currency": "PLN",
-      "durationMin": 95,
-      "name": {
-        "pl": "Pedicure spa z kolorem",
-        "en": "Spa pedicure with gel colour"
-      },
-      "shortDescription": {
-        "pl": "Komfortowy pedicure z pielegnacja, wygladzeniem i kolorem, ktory zostawia stopy zadbane, lekkie i gotowe na sandaly lub city break.",
-        "en": "A comfort-first pedicure with care, smoothing and colour that leaves the feet polished, light and ready for sandals or a weekend away."
-      },
-      "experienceNote": {
-        "pl": "Idealny duet z manicure przed slubem, wakacjami albo waznym weekendem.",
-        "en": "An ideal pairing with manicure before a wedding, a holiday or any important weekend."
-      },
-      "ctaLabel": {
-        "pl": "Dodaj do wizyty",
-        "en": "Add to your visit"
-      },
-      "mediaId": "service-pedicure"
-    },
-    {
-      "id": "stylizacja-brwi",
-      "category": {
-        "pl": "Oprawa twarzy",
-        "en": "Face framing"
+        "pl": "Wlosy",
+        "en": "Hair"
       },
       "featured": false,
-      "price": 150,
+      "price": 290,
       "currency": "PLN",
-      "durationMin": 45,
+      "durationMin": 100,
       "name": {
-        "pl": "Brow sculpt & tint",
-        "en": "Brow sculpt & tint"
+        "pl": "Tonowanie glossy refresh",
+        "en": "Gloss toning refresh"
       },
       "shortDescription": {
-        "pl": "Subtelne modelowanie i tonowanie, dzieki ktorym twarz wyglada swiezo nawet przy bardzo lekkim makijazu.",
-        "en": "Soft sculpting and tinting for a fresher, more defined face even when the make-up stays minimal."
+        "pl": "Odswiezenie tonu, blasku i miekkosci pomiedzy wiekszymi koloryzacjami.",
+        "en": "A tone, shine and softness refresh between bigger colouring appointments."
       },
       "experienceNote": {
-        "pl": "Szybki upgrade przed sesja, kolacja albo wyjazdem.",
-        "en": "A fast upgrade before a shoot, dinner or a weekend away."
+        "pl": "Idealne pomiedzy pelnymi koloryzacjami, gdy chcesz podtrzymac efekt.",
+        "en": "Ideal between full colour services when you want to maintain the finish."
       },
       "ctaLabel": {
         "pl": "Wybierz usluge",
         "en": "Choose service"
+      },
+      "mediaId": "service-hair"
+    },
+    {
+      "id": "rytual-regenerujacy-wlosy",
+      "category": {
+        "pl": "Wlosy",
+        "en": "Hair"
+      },
+      "featured": false,
+      "price": 210,
+      "currency": "PLN",
+      "durationMin": 60,
+      "name": {
+        "pl": "Rytual regenerujacy dla wlosow",
+        "en": "Restorative hair ritual"
+      },
+      "shortDescription": {
+        "pl": "Pielegnacja wyg?adzajaca i nawilzajaca dla bardziej miekkich, blyszczacych wlosow.",
+        "en": "A smoothing restorative treatment for softer, shinier and more touchable hair."
+      },
+      "experienceNote": {
+        "pl": "Czesto wybierany po sezonie zimowym albo przed wiekszym wyjsciem.",
+        "en": "Often booked after winter or before a more important event."
+      },
+      "ctaLabel": {
+        "pl": "Dodaj do wizyty",
+        "en": "Add to visit"
+      },
+      "mediaId": "service-hair"
+    },
+    {
+      "id": "laminacja-brwi-z-farbka",
+      "category": {
+        "pl": "Brwi i rzesy",
+        "en": "Brows & lashes"
+      },
+      "featured": false,
+      "price": 170,
+      "currency": "PLN",
+      "durationMin": 50,
+      "name": {
+        "pl": "Laminacja brwi z farbka",
+        "en": "Brow lamination + tint"
+      },
+      "shortDescription": {
+        "pl": "Ulozenie, dyscyplina i delikatne podbicie koloru dla bardziej uporzadkowanej oprawy oka.",
+        "en": "Structure, discipline and soft tinting for a more defined eye frame."
+      },
+      "experienceNote": {
+        "pl": "Szybki upgrade przed sesja, kolacja albo tygodniem bez mocnego makijazu.",
+        "en": "A quick upgrade before a shoot, dinner or a week of minimal make-up."
+      },
+      "ctaLabel": {
+        "pl": "Umow brwi",
+        "en": "Book brows"
+      },
+      "mediaId": "service-brows"
+    },
+    {
+      "id": "lifting-rzes-z-koloryzacja",
+      "category": {
+        "pl": "Brwi i rzesy",
+        "en": "Brows & lashes"
+      },
+      "featured": false,
+      "price": 185,
+      "currency": "PLN",
+      "durationMin": 60,
+      "name": {
+        "pl": "Lifting rzes z koloryzacja",
+        "en": "Lash lift + tint"
+      },
+      "shortDescription": {
+        "pl": "Uniesienie i kolor, ktore otwieraja spojrzenie bez efektu przesady.",
+        "en": "Lift and tint that opens the eye area without looking overdone."
+      },
+      "experienceNote": {
+        "pl": "Swietne przed urlopem albo dla osob, ktore nie chca codziennie tuszowac rzes.",
+        "en": "Great before a holiday or for guests who want less daily mascara."
+      },
+      "ctaLabel": {
+        "pl": "Zarezerwuj",
+        "en": "Book now"
+      },
+      "mediaId": "service-brows"
+    },
+    {
+      "id": "duet-brwi-rzesy",
+      "category": {
+        "pl": "Brwi i rzesy",
+        "en": "Brows & lashes"
+      },
+      "featured": false,
+      "price": 320,
+      "currency": "PLN",
+      "durationMin": 80,
+      "name": {
+        "pl": "Duo brwi + rzesy",
+        "en": "Brows + lashes duo"
+      },
+      "shortDescription": {
+        "pl": "Polaczenie laminacji brwi i liftingu rzes dla gotowej oprawy twarzy w jednej wizycie.",
+        "en": "A combined brows-and-lashes appointment for a complete face-framing result in one visit."
+      },
+      "experienceNote": {
+        "pl": "Najczesciej wybierane przed wakacjami, slubami i sesjami zdjeciowymi.",
+        "en": "Most often booked before holidays, weddings and photoshoots."
+      },
+      "ctaLabel": {
+        "pl": "Wybierz pakiet",
+        "en": "Choose duo"
       },
       "mediaId": "service-brows"
     }
@@ -460,25 +824,25 @@
       "en": "Booking"
     },
     "title": {
-      "pl": "Wyslij krotkie zgloszenie, a wrocimy z propozycja terminu i potwierdzeniem.",
-      "en": "Send a short request and we will come back with a suggested time and confirmation."
+      "pl": "Wybierz usluge, date i godzine. Reszte potwierdzimy w wybranym kanale.",
+      "en": "Choose the service, date and time. We will confirm the rest in your preferred channel."
     },
     "description": {
-      "pl": "Formularz skraca droge do wizyty: wybierasz usluge, zostawiasz preferowany termin i od razu otwierasz kanal, w ktorym najwygodniej kontynuowac rozmowe.",
-      "en": "The form shortens the path to an appointment: choose your service, leave your preferred timing and instantly continue the conversation in the channel that suits you best."
+      "pl": "Formularz jest krotszy i bardziej konkretny: od razu widzisz dostepne dni, zajete terminy i wolne sloty godzinowe.",
+      "en": "The form is shorter and more specific: you see available days, blocked dates and open time slots at a glance."
     },
     "helper": {
-      "pl": "Najczesciej odpisujemy w ciagu 2 godzin w godzinach pracy salonu.",
+      "pl": "Najczesciej odpowiadamy w ciagu 2 godzin w godzinach pracy salonu.",
       "en": "We usually reply within 2 hours during salon opening hours."
     },
     "assurances": [
       {
-        "pl": "odpowiedz w godzinach pracy salonu",
-        "en": "reply during salon opening hours"
+        "pl": "12 dni w kalendarzu",
+        "en": "12 days visible in the calendar"
       },
       {
-        "pl": "PL / EN guest care",
-        "en": "PL / EN guest care"
+        "pl": "zajete daty i sloty widoczne od razu",
+        "en": "blocked dates and busy slots shown instantly"
       },
       {
         "pl": "potwierdzenie przez WhatsApp, Telegram lub e-mail",
@@ -545,7 +909,7 @@
     },
     "notesPlaceholder": {
       "pl": "Napisz, czy to pierwsza wizyta, jaki efekt chcesz uzyskac albo czy zalezy Ci na konkretnym dniu.",
-      "en": "Tell us if this is your first visit, the result you want, or whether you need a specific day."
+      "en": "Tell us if this is your first visit, the result you want, or whether you need a very specific day."
     },
     "channels": [
       {
@@ -581,7 +945,101 @@
           "en": "Best when you want the details saved neatly in your inbox."
         }
       }
-    ]
+    ],
+    "calendar": {
+      "visibleDays": 12,
+      "closedWeekdays": [
+        0
+      ],
+      "blockedDayOffsets": [
+        2,
+        6,
+        10
+      ],
+      "timeSlots": [
+        "09:00",
+        "10:30",
+        "12:00",
+        "13:30",
+        "15:00",
+        "16:30",
+        "18:00"
+      ],
+      "busySlotsByDayOffset": {
+        "0": [
+          "12:00"
+        ],
+        "1": [
+          "09:00",
+          "15:00"
+        ],
+        "3": [
+          "10:30",
+          "13:30",
+          "18:00"
+        ],
+        "4": [
+          "09:00",
+          "10:30",
+          "12:00",
+          "13:30",
+          "15:00",
+          "16:30",
+          "18:00"
+        ],
+        "5": [
+          "12:00",
+          "16:30"
+        ],
+        "7": [
+          "09:00",
+          "10:30",
+          "15:00"
+        ],
+        "8": [
+          "13:30"
+        ],
+        "9": [
+          "10:30",
+          "12:00",
+          "18:00"
+        ],
+        "11": [
+          "09:00",
+          "16:30"
+        ]
+      },
+      "labels": {
+        "selectDate": {
+          "pl": "Wybierz date",
+          "en": "Choose a date"
+        },
+        "selectTime": {
+          "pl": "Wybierz godzine",
+          "en": "Choose a time"
+        },
+        "selectedDate": {
+          "pl": "Wybrana data",
+          "en": "Selected date"
+        },
+        "selectedTime": {
+          "pl": "Wybrana godzina",
+          "en": "Selected time"
+        },
+        "unavailable": {
+          "pl": "Niedostepne",
+          "en": "Unavailable"
+        },
+        "fullyBooked": {
+          "pl": "Brak miejsc",
+          "en": "Fully booked"
+        },
+        "available": {
+          "pl": "Dostepne",
+          "en": "Available"
+        }
+      }
+    }
   },
   "faq": {
     "eyebrow": {

@@ -7,10 +7,19 @@ interface Props {
 
 const { locale } = Astro.props;
 const channelIcons = {
-  whatsapp: "W",
-  telegram: "T",
+  whatsapp: "WA",
+  telegram: "TG",
   email: "@",
 } as const;
+const groupedServices = Array.from(
+  content.services.reduce((map, service) => {
+    const category = t(service.category, locale);
+    const services = map.get(category) ?? [];
+    services.push(service);
+    map.set(category, services);
+    return map;
+  }, new Map<string, typeof content.services>()),
+);
 ---
 
 <section class="section-shell" id="booking">
@@ -45,19 +54,24 @@ const channelIcons = {
         data-whatsapp={content.brand.contact.whatsApp}
         data-telegram={content.brand.contact.telegram}
         data-email={content.brand.contact.bookingEmail}
+        data-calendar={JSON.stringify(content.booking.calendar)}
       >
         <label>
           <span>{t(content.booking.fieldLabels.service, locale)}</span>
           <select name="service" required>
             {
-              content.services.map((service) => (
-                <option value={service.id}>{t(service.name, locale)}</option>
+              groupedServices.map(([category, services]) => (
+                <optgroup label={category}>
+                  {services.map((service) => (
+                    <option value={service.id}>{t(service.name, locale)}</option>
+                  ))}
+                </optgroup>
               ))
             }
           </select>
         </label>
 
-        <div class="form-grid">
+        <div class="form-grid form-grid--contact">
           <label>
             <span>{t(content.booking.fieldLabels.name, locale)}</span>
             <input name="name" type="text" autocomplete="name" required />
@@ -70,30 +84,30 @@ const channelIcons = {
             <span>{t(content.booking.fieldLabels.phone, locale)}</span>
             <input name="phone" type="tel" autocomplete="tel" required />
           </label>
-          <label>
-            <span>{t(content.booking.fieldLabels.date, locale)}</span>
-            <input
-              name="date"
-              type="text"
-              inputmode="numeric"
-              autocomplete="off"
-              placeholder={locale === "pl" ? "dd.mm.rrrr" : "dd/mm/yyyy"}
-              pattern={locale === "pl" ? "\\d{2}\\.\\d{2}\\.\\d{4}" : "\\d{2}/\\d{2}/\\d{4}"}
-              required
-            />
-          </label>
-          <label>
-            <span>{t(content.booking.fieldLabels.time, locale)}</span>
-            <input
-              name="time"
-              type="text"
-              inputmode="numeric"
-              autocomplete="off"
-              placeholder="14:30"
-              pattern="^([01]\\d|2[0-3]):([0-5]\\d)$"
-              required
-            />
-          </label>
+        </div>
+
+        <div class="scheduler-grid">
+          <section class="scheduler-panel">
+            <div class="scheduler-panel__header">
+              <strong>{t(content.booking.calendar.labels.selectDate, locale)}</strong>
+              <span data-date-summary>
+                {t(content.booking.calendar.labels.selectedDate, locale)}
+              </span>
+            </div>
+            <div class="calendar-grid" data-date-grid></div>
+            <input name="date" type="hidden" required data-date-input />
+          </section>
+
+          <section class="scheduler-panel">
+            <div class="scheduler-panel__header">
+              <strong>{t(content.booking.calendar.labels.selectTime, locale)}</strong>
+              <span data-time-summary>
+                {t(content.booking.calendar.labels.selectedTime, locale)}
+              </span>
+            </div>
+            <div class="timeslot-grid" data-time-grid></div>
+            <input name="time" type="hidden" required data-time-input />
+          </section>
         </div>
 
         <fieldset class="channel-grid">
@@ -144,6 +158,31 @@ const channelIcons = {
   type BookingLocale = "pl" | "en";
   type ContactChannel = "whatsapp" | "telegram" | "email";
   type FeedbackState = "pending" | "success" | "error";
+  type CalendarConfig = {
+    visibleDays: number;
+    closedWeekdays: number[];
+    blockedDayOffsets: number[];
+    timeSlots: string[];
+    busySlotsByDayOffset: Record<string, string[]>;
+    labels: {
+      selectDate: Record<BookingLocale, string>;
+      selectTime: Record<BookingLocale, string>;
+      selectedDate: Record<BookingLocale, string>;
+      selectedTime: Record<BookingLocale, string>;
+      unavailable: Record<BookingLocale, string>;
+      fullyBooked: Record<BookingLocale, string>;
+      available: Record<BookingLocale, string>;
+    };
+  };
+  type CalendarDay = {
+    offset: number;
+    iso: string;
+    weekdayIndex: number;
+    date: Date;
+    disabled: boolean;
+    fullyBooked: boolean;
+    busySlots: string[];
+  };
 
   function getFieldLabels(locale: BookingLocale) {
     return {
@@ -155,6 +194,90 @@ const channelIcons = {
       time: locale === "pl" ? "Godzina" : "Time",
       notes: locale === "pl" ? "Notatka" : "Notes",
     };
+  }
+
+  function getLocaleCode(locale: BookingLocale) {
+    return locale === "pl" ? "pl-PL" : "en-GB";
+  }
+
+  function toIsoDate(date: Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function parseCalendarConfig(form: HTMLFormElement): CalendarConfig {
+    const parsed = JSON.parse(form.dataset.calendar ?? "{}");
+    return {
+      visibleDays: Number(parsed.visibleDays ?? 12),
+      closedWeekdays: Array.isArray(parsed.closedWeekdays) ? parsed.closedWeekdays : [],
+      blockedDayOffsets: Array.isArray(parsed.blockedDayOffsets) ? parsed.blockedDayOffsets : [],
+      timeSlots: Array.isArray(parsed.timeSlots) ? parsed.timeSlots : [],
+      busySlotsByDayOffset:
+        parsed.busySlotsByDayOffset && typeof parsed.busySlotsByDayOffset === "object"
+          ? parsed.busySlotsByDayOffset
+          : {},
+      labels: parsed.labels,
+    };
+  }
+
+  function buildCalendarDays(config: CalendarConfig) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return Array.from({ length: config.visibleDays }, (_, offset) => {
+      const date = new Date(today);
+      date.setDate(today.getDate() + offset);
+
+      const busySlots = config.busySlotsByDayOffset[String(offset)] ?? [];
+      const blocked = config.blockedDayOffsets.includes(offset);
+      const closed = config.closedWeekdays.includes(date.getDay());
+      const fullyBooked = busySlots.length >= config.timeSlots.length;
+
+      return {
+        offset,
+        iso: toIsoDate(date),
+        weekdayIndex: date.getDay(),
+        date,
+        disabled: blocked || closed || fullyBooked,
+        fullyBooked,
+        busySlots,
+      } satisfies CalendarDay;
+    });
+  }
+
+  function formatCalendarButton(day: CalendarDay, locale: BookingLocale) {
+    const weekday = new Intl.DateTimeFormat(getLocaleCode(locale), {
+      weekday: "short",
+    }).format(day.date);
+    const dayNumber = new Intl.DateTimeFormat(getLocaleCode(locale), {
+      day: "2-digit",
+    }).format(day.date);
+    const month = new Intl.DateTimeFormat(getLocaleCode(locale), {
+      month: "short",
+    }).format(day.date);
+
+    return { weekday, dayNumber, month };
+  }
+
+  function formatSelectedDate(isoDate: string, locale: BookingLocale) {
+    if (!isoDate) {
+      return locale === "pl" ? "Brak wyboru" : "No date selected";
+    }
+
+    const [year, month, day] = isoDate.split("-").map(Number);
+    const date = new Date(year, month - 1, day);
+
+    return new Intl.DateTimeFormat(getLocaleCode(locale), {
+      weekday: "short",
+      day: "2-digit",
+      month: "short",
+    }).format(date);
+  }
+
+  function getMissingSlotMessage(locale: BookingLocale) {
+    return locale === "pl" ? "Wybierz date i godzine." : "Please choose a date and time.";
   }
 
   function applyRequestedService(serviceSelect: Element | null) {
@@ -232,8 +355,144 @@ const channelIcons = {
   }
 
   bookingForms.forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+
     const serviceSelect = form.querySelector("select[name='service']");
     applyRequestedService(serviceSelect);
+    const locale = form.dataset.locale === "en" ? "en" : "pl";
+    const calendarConfig = parseCalendarConfig(form);
+    const calendarDays = buildCalendarDays(calendarConfig);
+    const dateGrid = form.querySelector("[data-date-grid]");
+    const timeGrid = form.querySelector("[data-time-grid]");
+    const dateInput = form.querySelector("[data-date-input]");
+    const timeInput = form.querySelector("[data-time-input]");
+    const dateSummary = form.querySelector("[data-date-summary]");
+    const timeSummary = form.querySelector("[data-time-summary]");
+
+    let selectedDate = "";
+    let selectedTime = "";
+
+    function setDateSummary() {
+      if (!(dateSummary instanceof HTMLElement)) return;
+      dateSummary.textContent = `${calendarConfig.labels.selectedDate[locale]}: ${formatSelectedDate(selectedDate, locale)}`;
+    }
+
+    function setTimeSummary() {
+      if (!(timeSummary instanceof HTMLElement)) return;
+      timeSummary.textContent = `${calendarConfig.labels.selectedTime[locale]}: ${selectedTime || (locale === "pl" ? "Brak wyboru" : "No time selected")}`;
+    }
+
+    function renderTimeSlots() {
+      if (!(timeGrid instanceof HTMLElement) || !(timeInput instanceof HTMLInputElement)) return;
+
+      const activeDay = calendarDays.find((day) => day.iso === selectedDate);
+      timeGrid.innerHTML = "";
+
+      if (!activeDay || activeDay.disabled) {
+        timeInput.value = "";
+        selectedTime = "";
+        setTimeSummary();
+        return;
+      }
+
+      const availableSlots = calendarConfig.timeSlots.filter(
+        (slot) => !activeDay.busySlots.includes(slot),
+      );
+
+      if (!availableSlots.includes(selectedTime)) {
+        selectedTime = availableSlots[0] ?? "";
+      }
+
+      timeInput.value = selectedTime;
+
+      calendarConfig.timeSlots.forEach((slot) => {
+        const busy = activeDay.busySlots.includes(slot);
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "timeslot-chip";
+        button.textContent = slot;
+
+        if (busy) {
+          button.disabled = true;
+          button.dataset.state = "busy";
+          button.setAttribute("aria-label", `${slot} ${calendarConfig.labels.unavailable[locale]}`);
+        } else {
+          if (slot === selectedTime) {
+            button.classList.add("is-selected");
+          }
+
+          button.addEventListener("click", () => {
+            selectedTime = slot;
+            timeInput.value = slot;
+            renderTimeSlots();
+            setTimeSummary();
+          });
+        }
+
+        timeGrid.append(button);
+      });
+
+      setTimeSummary();
+    }
+
+    function renderCalendar() {
+      if (!(dateGrid instanceof HTMLElement) || !(dateInput instanceof HTMLInputElement)) return;
+
+      dateGrid.innerHTML = "";
+
+      calendarDays.forEach((day) => {
+        const button = document.createElement("button");
+        const formatted = formatCalendarButton(day, locale);
+        const stateLabel = day.disabled
+          ? day.fullyBooked
+            ? calendarConfig.labels.fullyBooked[locale]
+            : calendarConfig.labels.unavailable[locale]
+          : calendarConfig.labels.available[locale];
+
+        button.type = "button";
+        button.className = "calendar-chip";
+        button.dataset.state = day.disabled
+          ? day.fullyBooked
+            ? "full"
+            : "disabled"
+          : "available";
+        button.innerHTML = `
+          <span class="calendar-chip__weekday">${formatted.weekday}</span>
+          <strong>${formatted.dayNumber}</strong>
+          <span class="calendar-chip__month">${formatted.month}</span>
+          <small>${stateLabel}</small>
+        `;
+
+        if (day.disabled) {
+          button.disabled = true;
+        } else {
+          if (day.iso === selectedDate) {
+            button.classList.add("is-selected");
+          }
+
+          button.addEventListener("click", () => {
+            selectedDate = day.iso;
+            dateInput.value = day.iso;
+            renderCalendar();
+            renderTimeSlots();
+            setDateSummary();
+          });
+        }
+
+        dateGrid.append(button);
+      });
+
+      setDateSummary();
+    }
+
+    const firstAvailableDay = calendarDays.find((day) => !day.disabled);
+    if (firstAvailableDay && dateInput instanceof HTMLInputElement) {
+      selectedDate = firstAvailableDay.iso;
+      dateInput.value = firstAvailableDay.iso;
+    }
+
+    renderCalendar();
+    renderTimeSlots();
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -247,6 +506,12 @@ const channelIcons = {
       const feedback = currentForm.querySelector("[data-booking-feedback]");
       const message = buildMessage(currentForm, formData, locale);
       const target = buildTarget(currentForm, channel, message);
+
+      if (!String(formData.get("date") ?? "") || !String(formData.get("time") ?? "")) {
+        setFeedback(feedback, "error", getMissingSlotMessage(locale));
+        return;
+      }
+
       const payload = {
         serviceId: String(formData.get("service") ?? ""),
         customerName: String(formData.get("name") ?? ""),
