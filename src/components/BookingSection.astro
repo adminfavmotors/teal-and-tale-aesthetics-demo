@@ -67,11 +67,27 @@ const { locale } = Astro.props;
           </label>
           <label>
             <span>{t(content.booking.fieldLabels.date, locale)}</span>
-            <input name="date" type="date" required />
+            <input
+              name="date"
+              type="text"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder={locale === "pl" ? "dd.mm.rrrr" : "dd/mm/yyyy"}
+              pattern={locale === "pl" ? "\\d{2}\\.\\d{2}\\.\\d{4}" : "\\d{2}/\\d{2}/\\d{4}"}
+              required
+            />
           </label>
           <label>
             <span>{t(content.booking.fieldLabels.time, locale)}</span>
-            <input name="time" type="time" required />
+            <input
+              name="time"
+              type="text"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="14:30"
+              pattern="^([01]\\d|2[0-3]):([0-5]\\d)$"
+              required
+            />
           </label>
         </div>
 
