@@ -23,7 +23,7 @@ const { locale } = Astro.props;
     </div>
 
     <div>
-      <strong>{t(content.hero.primaryCta, locale)}</strong>
+      <strong>{locale === "pl" ? "Na skroty" : "Quick links"}</strong>
       <div class="footer-links">
         <a href="#booking">{t(content.footer.cta, locale)}</a>
         <a href={`/${locale}/privacy-policy/`}>{t(content.legal.privacyLinkLabel, locale)}</a>

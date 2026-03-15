@@ -171,7 +171,6 @@ main {
 .header-actions,
 .hero-actions,
 .hero-badges,
-.hero-metrics,
 .service-card__meta,
 .service-card__footer,
 .highlight-list,
@@ -181,10 +180,18 @@ main {
   gap: 0.85rem;
 }
 
+.header-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
 .brand-mark {
   display: inline-flex;
   align-items: center;
   gap: 0.9rem;
+  min-width: 0;
 }
 
 .brand-mark strong {
@@ -260,7 +267,7 @@ main {
 }
 
 .hero-grid {
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   align-items: start;
   min-height: auto;
   padding-top: 0.25rem;
@@ -283,6 +290,9 @@ main {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  gap: 0.75rem;
+  max-width: 36rem;
 }
 
 .hero-badges li,
@@ -297,10 +307,16 @@ main {
 }
 
 .hero-metrics article {
-  min-width: 9rem;
+  min-width: 0;
   padding: 0.95rem 1rem;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.64);
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
 }
 
 .hero-metrics strong {
@@ -317,6 +333,7 @@ main {
   position: relative;
   padding-left: 1rem;
   padding-top: 0.35rem;
+  min-height: 100%;
 }
 
 .image-frame {
@@ -426,6 +443,7 @@ main {
 .pillar-grid h3 {
   font-size: clamp(1.45rem, 2.2vw, 2rem);
   line-height: 1.08;
+  min-height: 2.35em;
 }
 
 .service-card__body p,
@@ -457,10 +475,18 @@ main {
   align-items: start;
 }
 
+.booking-layout {
+  grid-template-columns: 1fr;
+}
+
 .experience-copy,
 .booking-copy {
   display: grid;
   gap: 1.1rem;
+}
+
+.booking-copy {
+  max-width: 52rem;
 }
 
 .experience-gallery {
@@ -470,6 +496,7 @@ main {
 
 .pillar-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
 }
 
 .pillar-grid article,
@@ -483,6 +510,7 @@ main {
   gap: 0.75rem;
   align-content: start;
   min-height: 100%;
+  grid-template-rows: auto 1fr;
 }
 
 .highlight-list {
@@ -619,8 +647,11 @@ main {
 .channel-card {
   position: relative;
   display: grid;
-  gap: 0.35rem;
-  padding: 1rem;
+  gap: 0.7rem;
+  justify-items: center;
+  align-content: center;
+  min-height: 9rem;
+  padding: 1rem 0.9rem;
   border: 1px solid rgba(24, 50, 54, 0.1);
   border-radius: 1.2rem;
   background: rgba(255, 255, 255, 0.68);
@@ -637,6 +668,24 @@ main {
   inset: 0;
   opacity: 0;
   cursor: pointer;
+}
+
+.channel-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  background: rgba(153, 226, 226, 0.18);
+  border: 1px solid rgba(153, 226, 226, 0.34);
+  font-weight: 800;
+  font-size: 1.1rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.channel-card strong {
+  font-size: 1.05rem;
 }
 
 .channel-card:has(input:checked) {
@@ -741,6 +790,12 @@ main {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+}
+
+.sticky-cta[data-blocked="true"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1rem);
 }
 
 .sticky-cta:hover {
@@ -924,6 +979,10 @@ main {
     padding-left: 0;
   }
 
+  .header-bar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
   .hero-grid {
     padding-top: 0;
   }
@@ -941,12 +1000,22 @@ main {
 }
 
 @media (max-width: 720px) {
+  .header-bar {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .header-actions .pill-button {
-    display: none;
+    min-width: 12rem;
   }
 
   .brand-mark small {
-    display: none;
+    display: block;
   }
 
   .hero-copy,
@@ -961,6 +1030,11 @@ main {
     font-size: 2.55rem;
   }
 
+  .hero-actions,
+  .hero-metrics {
+    grid-template-columns: 1fr;
+  }
+
   .image-frame--hero,
   .image-frame--service,
   .image-frame--instagram,
@@ -970,6 +1044,10 @@ main {
 
   .admin-status-form {
     grid-template-columns: 1fr;
+  }
+
+  .sticky-cta {
+    display: none;
   }
 }
 

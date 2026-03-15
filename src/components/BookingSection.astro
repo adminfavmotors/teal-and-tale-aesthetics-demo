@@ -6,6 +6,11 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const channelIcons = {
+  whatsapp: "W",
+  telegram: "T",
+  email: "@",
+} as const;
 ---
 
 <section class="section-shell" id="booking">
@@ -97,8 +102,8 @@ const { locale } = Astro.props;
             content.booking.channels.map((channel, index) => (
               <label class="channel-card">
                 <input type="radio" name="channel" value={channel.id} checked={index === 0} />
+                <span class="channel-card__icon" aria-hidden="true">{channelIcons[channel.id]}</span>
                 <strong>{t(channel.label, locale)}</strong>
-                <span>{t(channel.description, locale)}</span>
               </label>
             ))
           }

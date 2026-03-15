@@ -40,6 +40,7 @@ const { locale, title, description, path } = Astro.props;
   const sticky = document.querySelector("[data-sticky-cta]");
   const heroCopy = document.querySelector("[data-hero-copy]");
   const floatingCard = document.querySelector("[data-hero-float]");
+  const stickyStopTargets = Array.from(document.querySelectorAll("#booking, .site-footer"));
 
   if (heroCopy) {
     gsap.fromTo(heroCopy, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 1.1, ease: "power3.out" });
@@ -86,4 +87,16 @@ const { locale, title, description, path } = Astro.props;
 
   updateSticky();
   window.addEventListener("scroll", updateSticky, { passive: true });
+
+  if (sticky instanceof HTMLElement && stickyStopTargets.length) {
+    const stickyObserver = new IntersectionObserver(
+      (entries) => {
+        const shouldHide = entries.some((entry) => entry.isIntersecting);
+        sticky.dataset.blocked = shouldHide ? "true" : "false";
+      },
+      { threshold: 0.15 },
+    );
+
+    stickyStopTargets.forEach((target) => stickyObserver.observe(target));
+  }
 </script>
