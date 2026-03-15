@@ -502,10 +502,6 @@ main {
   align-items: start;
 }
 
-.booking-layout {
-  grid-template-columns: 1fr;
-}
-
 .experience-copy,
 .booking-copy {
   display: grid;
@@ -513,7 +509,11 @@ main {
 }
 
 .booking-copy {
-  max-width: 52rem;
+  max-width: none;
+}
+
+.booking-layout {
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
 }
 
 .experience-gallery {
@@ -621,14 +621,17 @@ main {
 }
 
 .booking-statuses {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
   gap: 0.65rem;
   padding: 1rem;
+  align-content: start;
+  justify-content: start;
 }
 
 .booking-form-card {
   padding: 1.4rem;
+  min-height: 100%;
 }
 
 .booking-form,
