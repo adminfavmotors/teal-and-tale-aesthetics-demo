@@ -220,6 +220,14 @@ main {
   transition: color 180ms ease;
 }
 
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  line-height: 1;
+}
+
 .site-nav a:hover,
 .language-switch:hover,
 .ghost-link:hover {
@@ -1002,16 +1010,18 @@ main {
 @media (max-width: 720px) {
   .header-bar {
     grid-template-columns: 1fr;
-    justify-items: start;
+    justify-items: center;
   }
 
   .header-actions {
-    width: 100%;
-    justify-content: space-between;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
   }
 
   .header-actions .pill-button {
-    min-width: 12rem;
+    min-width: 11rem;
   }
 
   .brand-mark small {
