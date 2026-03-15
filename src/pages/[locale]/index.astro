@@ -1,0 +1,35 @@
+---
+import BookingSection from "../../components/BookingSection.astro";
+import ExperienceSection from "../../components/ExperienceSection.astro";
+import FaqSection from "../../components/FaqSection.astro";
+import HeroSection from "../../components/HeroSection.astro";
+import InstagramSection from "../../components/InstagramSection.astro";
+import ServicesSection from "../../components/ServicesSection.astro";
+import TrustSection from "../../components/TrustSection.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { isLocale, locales, type Locale } from "../../lib/content";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({
+    params: { locale },
+  }));
+}
+
+const rawLocale = Astro.params.locale ?? "pl";
+
+if (!isLocale(rawLocale)) {
+  return Astro.redirect("/pl/");
+}
+
+const locale = rawLocale as Locale;
+---
+
+<SiteLayout locale={locale} path={`/${locale}/`}>
+  <HeroSection locale={locale} />
+  <ServicesSection locale={locale} />
+  <ExperienceSection locale={locale} />
+  <TrustSection locale={locale} />
+  <InstagramSection locale={locale} />
+  <BookingSection locale={locale} />
+  <FaqSection locale={locale} />
+</SiteLayout>

@@ -1,0 +1,29 @@
+---
+import { content, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<section class="section-shell" id="faq">
+  <div class="container-shell">
+    <div class="section-heading" data-reveal>
+      <p class="section-eyebrow">{t(content.faq.eyebrow, locale)}</p>
+      <h2>{t(content.faq.title, locale)}</h2>
+    </div>
+
+    <div class="faq-list">
+      {
+        content.faq.items.map((item) => (
+          <details class="glass-card faq-item" data-reveal>
+            <summary>{t(item.question, locale)}</summary>
+            <p>{t(item.answer, locale)}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

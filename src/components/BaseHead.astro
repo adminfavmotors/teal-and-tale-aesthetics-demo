@@ -1,0 +1,44 @@
+---
+import { content, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const { locale, title, description, path = "/" } = Astro.props;
+const pageTitle = title ?? t(content.meta.title, locale);
+const pageDescription = description ?? t(content.meta.description, locale);
+const canonical = new URL(path, content.meta.siteUrl).toString();
+const alternateLocale = locale === "pl" ? "en" : "pl";
+const alternatePath = path.replace(`/${locale}/`, `/${alternateLocale}/`);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<title>{pageTitle}</title>
+<meta name="description" content={pageDescription} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang={locale} href={canonical} />
+<link
+  rel="alternate"
+  hreflang={alternateLocale}
+  href={new URL(alternatePath, content.meta.siteUrl).toString()}
+/>
+<link rel="alternate" hreflang="x-default" href={new URL("/pl/", content.meta.siteUrl).toString()} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
+<meta property="og:type" content="website" />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDescription} />
+<meta property="og:image" content={content.meta.ogImage} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={content.meta.siteName} />

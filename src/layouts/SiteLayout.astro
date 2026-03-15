@@ -1,0 +1,106 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import StickyBooking from "../components/StickyBooking.astro";
+import type { Locale } from "../lib/content";
+import "../styles/global.css";
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const { locale, title, description, path } = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale === "pl" ? "pl-PL" : "en-GB"}>
+  <head>
+    <BaseHead locale={locale} title={title} description={description} path={path} />
+  </head>
+  <body>
+    <div class="ambient ambient--one"></div>
+    <div class="ambient ambient--two"></div>
+    <Header locale={locale} />
+    <main>
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <StickyBooking locale={locale} />
+  </body>
+</html>
+
+<script>
+  import { gsap } from "gsap";
+
+  const root = document.documentElement;
+  const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
+  const sticky = document.querySelector("[data-sticky-cta]");
+  const heroCopy = document.querySelector("[data-hero-copy]");
+  const floatingCard = document.querySelector("[data-hero-float]");
+
+  if (heroCopy) {
+    gsap.fromTo(heroCopy, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 1.1, ease: "power3.out" });
+  }
+
+  if (floatingCard) {
+    gsap.fromTo(
+      floatingCard,
+      { opacity: 0, y: 24, rotate: -4 },
+      { opacity: 1, y: 0, rotate: 0, delay: 0.25, duration: 1.2, ease: "power3.out" },
+    );
+    gsap.to(floatingCard, { y: 12, repeat: -1, yoyo: true, duration: 3.4, ease: "sine.inOut" });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.2 },
+  );
+
+  revealItems.forEach((item) => observer.observe(item));
+
+  document.querySelectorAll("img[loading='lazy']").forEach((image) => {
+    if (!(image instanceof HTMLImageElement)) return;
+
+    image.classList.add("lazy-media");
+    if (image.complete) {
+      image.classList.add("is-visible");
+      return;
+    }
+
+    image.addEventListener("load", () => image.classList.add("is-visible"), { once: true });
+  });
+
+  const updateSticky = () => {
+    if (!(sticky instanceof HTMLElement)) return;
+    const threshold = Number(sticky.dataset.threshold ?? 260);
+    sticky.dataset.visible = window.scrollY > threshold ? "true" : "false";
+  };
+
+  updateSticky();
+  window.addEventListener("scroll", updateSticky, { passive: true });
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.matchMedia("(pointer:fine)").matches) {
+    window.addEventListener(
+      "pointermove",
+      (event) => {
+        gsap.to(root, {
+          duration: 0.55,
+          ease: "power3.out",
+          "--pointer-x": `${event.clientX}px`,
+          "--pointer-y": `${event.clientY}px`,
+        });
+      },
+      { passive: true },
+    );
+  }
+</script>

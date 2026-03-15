@@ -1,0 +1,45 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { content, isLocale, locales, type Locale, t } from "../../lib/content";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({
+    params: { locale },
+  }));
+}
+
+const rawLocale = Astro.params.locale ?? "pl";
+
+if (!isLocale(rawLocale)) {
+  return Astro.redirect("/pl/privacy-policy/");
+}
+
+const locale = rawLocale as Locale;
+---
+
+<SiteLayout
+  locale={locale}
+  title={`${content.brand.name} | ${t(content.legal.privacyLinkLabel, locale)}`}
+  path={`/${locale}/privacy-policy/`}
+>
+  <section class="section-shell">
+    <div class="container-shell policy-layout">
+      <div class="section-heading" data-reveal>
+        <p class="section-eyebrow">{t(content.legal.privacyLinkLabel, locale)}</p>
+        <h1>{t(content.legal.privacyLinkLabel, locale)}</h1>
+        <p class="section-lead">{t(content.legal.policyIntro, locale)}</p>
+      </div>
+
+      <div class="policy-list">
+        {
+          content.legal.policySections.map((section) => (
+            <article class="glass-card" data-reveal>
+              <h2>{t(section.title, locale)}</h2>
+              <p>{t(section.copy, locale)}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</SiteLayout>

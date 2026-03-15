@@ -1,0 +1,70 @@
+---
+import { content, formatPrice, getMediaById, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const heroMedia = getMediaById(content.hero.mediaId);
+const featuredService = content.services.find((service) => service.id === "manicure-hybrydowy") ?? content.services[0];
+---
+
+<section class="hero-section section-shell" id="top">
+  <div class="container-shell hero-grid">
+    <div class="hero-copy glass-card glass-card--strong" data-hero-copy data-reveal>
+      <p class="section-eyebrow">{t(content.hero.eyebrow, locale)}</p>
+      <h1>{t(content.hero.title, locale)}</h1>
+      <p class="section-lead">{t(content.hero.description, locale)}</p>
+
+      <div class="hero-actions">
+        <a class="pill-button" href="#booking">{t(content.hero.primaryCta, locale)}</a>
+        <a class="ghost-link" href="#services">{t(content.hero.secondaryCta, locale)}</a>
+      </div>
+
+      <ul class="hero-badges">
+        {
+          content.hero.badges.map((badge) => <li>{t(badge, locale)}</li>)
+        }
+      </ul>
+
+      <div class="hero-metrics">
+        {
+          content.hero.metrics.map((metric) => (
+            <article>
+              <strong>{metric.value}</strong>
+              <span>{t(metric.label, locale)}</span>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="hero-visual" data-reveal>
+      {
+        heroMedia && (
+          <figure class="image-frame image-frame--hero">
+            <img
+              src={heroMedia.src}
+              alt={t(heroMedia.alt, locale)}
+              width={heroMedia.width}
+              height={heroMedia.height}
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
+        )
+      }
+
+      <aside class="hero-floating-card glass-card" data-hero-float>
+        <span class="mini-label">{t(featuredService.category, locale)}</span>
+        <strong>{t(featuredService.name, locale)}</strong>
+        <p>{t(featuredService.experienceNote, locale)}</p>
+        <div class="floating-meta">
+          <span>{formatPrice(featuredService.price, featuredService.currency, locale)}</span>
+          <span>{featuredService.durationMin} min</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,294 @@
+---
+import SiteLayout from "../../../layouts/SiteLayout.astro";
+import { isLocale, type Locale } from "../../../lib/content";
+import { leadStatuses, listLeads, type LeadStatus } from "../../../lib/leads";
+
+export const prerender = false;
+
+const rawLocale = Astro.params.locale ?? "pl";
+
+if (!isLocale(rawLocale)) {
+  return Astro.redirect("/pl/admin/leads/");
+}
+
+const locale = rawLocale as Locale;
+const leads = await listLeads();
+
+const copy = {
+  pl: {
+    eyebrow: "Leads admin",
+    title: "Zapisane zgłoszenia demo",
+    description:
+      "Widok pokazuje wszystkie leady zapisane przez formularz i pozwala szybko zmieniać ich status bez wychodzenia z projektu.",
+    empty: "Brak zapisanych leadów. Pierwsze zgłoszenie pojawi się tutaj po wysłaniu formularza booking.",
+    update: "Zapisz status",
+    updating: "Aktualizujemy status...",
+    updated: "Status zapisany.",
+    updateError: "Nie udało się zapisać nowego statusu.",
+    createdAt: "Utworzono",
+    updatedAt: "Ostatnia zmiana",
+    service: "Usługa",
+    channel: "Kanał kontaktu",
+    preferredSlot: "Preferowany termin",
+    notes: "Notatka",
+    locale: "Locale",
+    phone: "Telefon",
+    email: "E-mail",
+    summaryTitle: "Snapshot statusów",
+    labels: {
+      new: "new",
+      contacted: "contacted",
+      awaiting_confirmation: "awaiting_confirmation",
+      confirmed: "confirmed",
+      redirected_to_booksy: "redirected_to_booksy",
+      cancelled: "cancelled",
+      no_response: "no_response",
+    },
+  },
+  en: {
+    eyebrow: "Leads admin",
+    title: "Stored demo enquiries",
+    description:
+      "This view lists every lead captured by the booking form and lets you change its status directly inside the project.",
+    empty: "No leads yet. The first booking request will appear here after the form is submitted.",
+    update: "Save status",
+    updating: "Updating status...",
+    updated: "Status saved.",
+    updateError: "We could not save the new status.",
+    createdAt: "Created",
+    updatedAt: "Last update",
+    service: "Service",
+    channel: "Contact channel",
+    preferredSlot: "Preferred slot",
+    notes: "Notes",
+    locale: "Locale",
+    phone: "Phone",
+    email: "Email",
+    summaryTitle: "Status snapshot",
+    labels: {
+      new: "new",
+      contacted: "contacted",
+      awaiting_confirmation: "awaiting_confirmation",
+      confirmed: "confirmed",
+      redirected_to_booksy: "redirected_to_booksy",
+      cancelled: "cancelled",
+      no_response: "no_response",
+    },
+  },
+} satisfies Record<
+  Locale,
+  {
+    eyebrow: string;
+    title: string;
+    description: string;
+    empty: string;
+    update: string;
+    updating: string;
+    updated: string;
+    updateError: string;
+    createdAt: string;
+    updatedAt: string;
+    service: string;
+    channel: string;
+    preferredSlot: string;
+    notes: string;
+    locale: string;
+    phone: string;
+    email: string;
+    summaryTitle: string;
+    labels: Record<LeadStatus, string>;
+  }
+>;
+
+const currentCopy = copy[locale];
+
+const counts = Object.fromEntries(
+  leadStatuses.map((status) => [status, leads.filter((lead) => lead.status === status).length]),
+) as Record<LeadStatus, number>;
+
+const dateLocale = locale === "pl" ? "pl-PL" : "en-GB";
+
+function formatDateTime(value: string) {
+  return new Intl.DateTimeFormat(dateLocale, {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date(value));
+}
+---
+
+<SiteLayout locale={locale} title={`Leads admin | ${locale.toUpperCase()}`} path={`/${locale}/admin/leads/`}>
+  <section class="section-shell">
+    <div class="container-shell admin-layout">
+      <div class="section-heading" data-reveal>
+        <p class="section-eyebrow">{currentCopy.eyebrow}</p>
+        <h1>{currentCopy.title}</h1>
+        <p class="section-lead">{currentCopy.description}</p>
+      </div>
+
+      <div class="admin-summary-grid">
+        {
+          leadStatuses.map((status) => (
+            <article class="glass-card admin-summary-card" data-reveal>
+              <span class="mini-label">{currentCopy.labels[status]}</span>
+              <strong>{counts[status]}</strong>
+            </article>
+          ))
+        }
+      </div>
+
+      {
+        leads.length === 0 ? (
+          <div class="glass-card admin-empty" data-reveal>
+            <p>{currentCopy.empty}</p>
+          </div>
+        ) : (
+          <div class="admin-lead-list">
+            {
+              leads.map((lead) => (
+                <article class="glass-card admin-lead-card" data-reveal>
+                  <div class="admin-lead-top">
+                    <div>
+                      <p class="section-eyebrow">{lead.customerName}</p>
+                      <h2>{lead.serviceName}</h2>
+                    </div>
+                    <span class={`admin-status-badge admin-status-badge--${lead.status}`}>
+                      {currentCopy.labels[lead.status]}
+                    </span>
+                  </div>
+
+                  <div class="admin-lead-meta">
+                    <p>
+                      <strong>{currentCopy.createdAt}:</strong> {formatDateTime(lead.createdAt)}
+                    </p>
+                    <p>
+                      <strong>{currentCopy.updatedAt}:</strong> {formatDateTime(lead.updatedAt)}
+                    </p>
+                    <p>
+                      <strong>{currentCopy.service}:</strong> {lead.serviceName}
+                    </p>
+                    <p>
+                      <strong>{currentCopy.channel}:</strong> {lead.preferredContactChannel}
+                    </p>
+                    <p>
+                      <strong>{currentCopy.preferredSlot}:</strong> {lead.preferredDate} {lead.preferredTime}
+                    </p>
+                    <p>
+                      <strong>{currentCopy.locale}:</strong> {lead.locale}
+                    </p>
+                    <p>
+                      <strong>{currentCopy.phone}:</strong> <a href={`tel:${lead.phone}`}>{lead.phone}</a>
+                    </p>
+                    <p>
+                      <strong>{currentCopy.email}:</strong> <a href={`mailto:${lead.email}`}>{lead.email}</a>
+                    </p>
+                  </div>
+
+                  {
+                    lead.notes && (
+                      <div class="admin-lead-notes">
+                        <strong>{currentCopy.notes}</strong>
+                        <p>{lead.notes}</p>
+                      </div>
+                    )
+                  }
+
+                  <form
+                    class="admin-status-form"
+                    data-status-form
+                    data-lead-id={lead.id}
+                    data-updating={currentCopy.updating}
+                    data-updated={currentCopy.updated}
+                    data-error={currentCopy.updateError}
+                  >
+                    <label>
+                      <span class="mini-label">Status</span>
+                      <select name="status">
+                        {
+                          leadStatuses.map((status) => (
+                            <option value={status} selected={lead.status === status}>
+                              {currentCopy.labels[status]}
+                            </option>
+                          ))
+                        }
+                      </select>
+                    </label>
+
+                    <button class="pill-button pill-button--compact" type="submit">
+                      {currentCopy.update}
+                    </button>
+                    <p class="admin-status-feedback" data-status-feedback></p>
+                  </form>
+                </article>
+              ))
+            }
+          </div>
+        )
+      }
+    </div>
+  </section>
+</SiteLayout>
+
+<script>
+  const statusForms = document.querySelectorAll("[data-status-form]");
+
+  statusForms.forEach((form) => {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const currentForm = event.currentTarget;
+      if (!(currentForm instanceof HTMLFormElement)) return;
+
+      const leadId = currentForm.dataset.leadId;
+      const feedback = currentForm.querySelector("[data-status-feedback]");
+      const statusSelect = currentForm.querySelector("select[name='status']");
+      const submitButton = currentForm.querySelector("button[type='submit']");
+
+      if (!leadId || !(statusSelect instanceof HTMLSelectElement)) return;
+
+      if (feedback instanceof HTMLElement) {
+        feedback.dataset.state = "pending";
+        feedback.textContent = currentForm.dataset.updating ?? "";
+      }
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+      }
+
+      try {
+        const response = await fetch(`/api/leads/${leadId}/status`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            accept: "application/json",
+          },
+          body: JSON.stringify({
+            status: statusSelect.value,
+          }),
+        });
+
+        const result = await response.json().catch(() => null);
+
+        if (!response.ok) {
+          throw new Error(result?.message ?? currentForm.dataset.error ?? "Status update failed.");
+        }
+
+        if (feedback instanceof HTMLElement) {
+          feedback.dataset.state = "success";
+          feedback.textContent = currentForm.dataset.updated ?? "";
+        }
+
+        window.setTimeout(() => window.location.reload(), 250);
+      } catch (error) {
+        if (feedback instanceof HTMLElement) {
+          feedback.dataset.state = "error";
+          feedback.textContent =
+            error instanceof Error ? error.message : currentForm.dataset.error ?? "Status update failed.";
+        }
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+        }
+      }
+    });
+  });
+</script>

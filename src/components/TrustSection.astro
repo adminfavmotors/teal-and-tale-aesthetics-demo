@@ -1,0 +1,43 @@
+---
+import { content, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<section class="section-shell" id="trust">
+  <div class="container-shell">
+    <div class="section-heading" data-reveal>
+      <p class="section-eyebrow">{t(content.trust.eyebrow, locale)}</p>
+      <h2>{t(content.trust.title, locale)}</h2>
+      <p class="section-lead">{t(content.trust.description, locale)}</p>
+    </div>
+
+    <div class="trust-grid">
+      {
+        content.trust.platforms.map((platform) => (
+          <article class="glass-card trust-card" data-reveal>
+            <div class="trust-card__top">
+              <span class="mini-label">{platform.name}</span>
+              <strong>{platform.rating}</strong>
+            </div>
+            <p class="trust-card__count">
+              {platform.reviewCount} · {t(platform.sourceLabel, locale)}
+            </p>
+            <ul>
+              {
+                platform.notes.map((note) => <li>{t(note, locale)}</li>)
+              }
+            </ul>
+            <a class="ghost-link" href={platform.link} target="_blank" rel="noreferrer">
+              {t(platform.ctaLabel, locale)}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

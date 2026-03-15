@@ -1,0 +1,53 @@
+---
+import { content, getMediaById, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<section class="section-shell" id="instagram">
+  <div class="container-shell">
+    <div class="section-heading" data-reveal>
+      <p class="section-eyebrow">{t(content.instagram.eyebrow, locale)}</p>
+      <h2>{t(content.instagram.title, locale)}</h2>
+      <p class="section-lead">{t(content.instagram.description, locale)}</p>
+    </div>
+
+    <div class="instagram-grid">
+      {
+        content.instagram.posts.map((post) => {
+          const media = getMediaById(post.imageId);
+
+          return (
+            <a class="instagram-card" href={post.link} target="_blank" rel="noreferrer" data-reveal>
+              {
+                media && (
+                  <figure class="image-frame image-frame--instagram">
+                    <img
+                      src={media.src}
+                      alt={t(media.alt, locale)}
+                      width={media.width}
+                      height={media.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </figure>
+                )
+              }
+              <span>{t(post.title, locale)}</span>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <div class="centered-action" data-reveal>
+      <a class="pill-button" href={content.brand.contact.instagram} target="_blank" rel="noreferrer">
+        {t(content.instagram.ctaLabel, locale)}
+      </a>
+    </div>
+  </div>
+</section>

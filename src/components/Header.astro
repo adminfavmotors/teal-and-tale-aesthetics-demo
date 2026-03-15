@@ -1,0 +1,39 @@
+---
+import { content, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const otherLocale = locale === "pl" ? "en" : "pl";
+---
+
+<header class="site-header">
+  <div class="container-shell flex items-center justify-between gap-6">
+    <a class="brand-mark" href={`/${locale}/`}>
+      <span class="brand-mark__dot"></span>
+      <span>
+        <strong>{content.brand.name}</strong>
+        <small>{t(content.brand.tagline, locale)}</small>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      {
+        content.navigation.map((item) => (
+          <a href={`#${item.id}`}>{t(item.label, locale)}</a>
+        ))
+      }
+    </nav>
+
+    <div class="header-actions">
+      <a class="language-switch" href={`/${otherLocale}/`}>
+        {otherLocale.toUpperCase()}
+      </a>
+      <a class="pill-button pill-button--compact" href="#booking">
+        {t(content.hero.primaryCta, locale)}
+      </a>
+    </div>
+  </div>
+</header>

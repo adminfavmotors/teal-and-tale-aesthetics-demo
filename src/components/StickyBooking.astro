@@ -1,0 +1,18 @@
+---
+import { content, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<a
+  class="sticky-cta"
+  data-sticky-cta
+  href="#booking"
+  data-threshold={content.settings.stickyCtaAfterScroll}
+>
+  {t(content.hero.primaryCta, locale)}
+</a>

@@ -1,0 +1,60 @@
+---
+import { content, formatDuration, formatPrice, getMediaById, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const services = content.services.filter((service) => service.featured);
+---
+
+<section class="section-shell" id="services">
+  <div class="container-shell">
+    <div class="section-heading" data-reveal>
+      <p class="section-eyebrow">{t(content.servicesIntro.eyebrow, locale)}</p>
+      <h2>{t(content.servicesIntro.title, locale)}</h2>
+      <p class="section-lead">{t(content.servicesIntro.description, locale)}</p>
+    </div>
+
+    <div class="service-grid">
+      {
+        services.map((service) => {
+          const media = getMediaById(service.mediaId);
+
+          return (
+            <article class="service-card glass-card" data-reveal>
+              {
+                media && (
+                  <figure class="image-frame image-frame--service">
+                    <img
+                      src={media.src}
+                      alt={t(media.alt, locale)}
+                      width={media.width}
+                      height={media.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </figure>
+                )
+              }
+
+              <div class="service-card__body">
+                <div class="service-card__meta">
+                  <span>{t(service.category, locale)}</span>
+                  <span>{formatDuration(service.durationMin)}</span>
+                </div>
+                <h3>{t(service.name, locale)}</h3>
+                <p>{t(service.shortDescription, locale)}</p>
+                <div class="service-card__footer">
+                  <strong>{formatPrice(service.price, service.currency, locale)}</strong>
+                  <a href={`/${locale}/?service=${service.id}#booking`}>{t(service.ctaLabel, locale)}</a>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

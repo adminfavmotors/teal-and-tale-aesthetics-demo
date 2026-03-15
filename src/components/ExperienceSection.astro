@@ -1,0 +1,54 @@
+---
+import { content, getMediaById, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const images = content.experience.mediaIds.map((id) => getMediaById(id)).filter(Boolean);
+---
+
+<section class="section-shell" id="experience">
+  <div class="container-shell experience-layout">
+    <div class="experience-copy" data-reveal>
+      <p class="section-eyebrow">{t(content.experience.eyebrow, locale)}</p>
+      <h2>{t(content.experience.title, locale)}</h2>
+      <p class="section-lead">{t(content.experience.description, locale)}</p>
+
+      <div class="pillar-grid">
+        {
+          content.experience.pillars.map((pillar) => (
+            <article class="glass-card">
+              <h3>{t(pillar.title, locale)}</h3>
+              <p>{t(pillar.copy, locale)}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <ul class="highlight-list">
+        {
+          content.experience.highlights.map((item) => <li>{t(item, locale)}</li>)
+        }
+      </ul>
+    </div>
+
+    <div class="experience-gallery">
+      {
+        images.map((image) => (
+          <figure class="image-frame image-frame--experience" data-reveal>
+            <img
+              src={image!.src}
+              alt={t(image!.alt, locale)}
+              width={image!.width}
+              height={image!.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

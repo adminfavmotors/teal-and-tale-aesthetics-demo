@@ -1,0 +1,887 @@
+{
+  "meta": {
+    "siteName": "Teal & Tale Aesthetics",
+    "siteUrl": "https://tealandtale.example",
+    "title": {
+      "pl": "Teal & Tale Aesthetics | Premium beauty salon w Krakowie, Zabłocie",
+      "en": "Teal & Tale Aesthetics | Premium beauty salon in Krakow, Zablocie"
+    },
+    "description": {
+      "pl": "Premium beauty salon w Krakowie, Zabłocie. Signature manicure, glossy colour, pedicure spa i kameralna atmosfera dopracowana jak editorial.",
+      "en": "A premium beauty salon in Krakow, Zablocie. Signature manicure, glossy colour, spa pedicure and a calm atmosphere curated with an editorial eye."
+    },
+    "ogImage": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80"
+  },
+  "brand": {
+    "name": "Teal & Tale Aesthetics",
+    "tagline": {
+      "pl": "Editorial beauty rituals with a quiet luxury finish",
+      "en": "Editorial beauty rituals with a quiet luxury finish"
+    },
+    "addressLabel": {
+      "pl": "Kraków, Zabłocie",
+      "en": "Krakow, Zablocie"
+    },
+    "addressLine": {
+      "pl": "ul. Zabłocie 24/U2, 30-701 Kraków",
+      "en": "24 Zablocie Street, Unit U2, 30-701 Krakow"
+    },
+    "hours": [
+      {
+        "label": {
+          "pl": "Pon - Pt",
+          "en": "Mon - Fri"
+        },
+        "value": "09:00 - 20:00"
+      },
+      {
+        "label": {
+          "pl": "Sobota",
+          "en": "Saturday"
+        },
+        "value": "10:00 - 17:00"
+      }
+    ],
+    "contact": {
+      "phone": "+48 577 214 830",
+      "bookingEmail": "bookings@tealandtale.pl",
+      "whatsApp": "+48577214830",
+      "telegram": "tealandtale_krakow",
+      "instagram": "https://www.instagram.com/tealandtale.krakow/"
+    }
+  },
+  "navigation": [
+    {
+      "id": "services",
+      "label": {
+        "pl": "Usługi",
+        "en": "Services"
+      }
+    },
+    {
+      "id": "experience",
+      "label": {
+        "pl": "Atmosfera",
+        "en": "Experience"
+      }
+    },
+    {
+      "id": "trust",
+      "label": {
+        "pl": "Opinie",
+        "en": "Reviews"
+      }
+    },
+    {
+      "id": "booking",
+      "label": {
+        "pl": "Rezerwacja",
+        "en": "Booking"
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": {
+      "pl": "Premium beauty apartment in Kraków, Zabłocie",
+      "en": "Premium beauty apartment in Krakow, Zablocie"
+    },
+    "title": {
+      "pl": "Paznokcie, glossy hair i spokojna atmosfera, do której chce się wracać.",
+      "en": "Polished nails, glossy hair and a calm atmosphere you will want to come back to."
+    },
+    "description": {
+      "pl": "Teal & Tale łączy precyzję zabiegu z miękkim rytuałem gościnności. Przychodzisz na manicure, kolor albo pedicure, a wychodzisz z efektem, który wygląda świeżo, luksusowo i naturalnie zarazem.",
+      "en": "Teal & Tale blends technical precision with a softer hospitality ritual. You come in for nails, colour or pedicure and leave with a finish that feels polished, fresh and quietly luxurious."
+    },
+    "primaryCta": {
+      "pl": "Umów wizytę",
+      "en": "Book your visit"
+    },
+    "secondaryCta": {
+      "pl": "Poznaj ofertę",
+      "en": "Explore services"
+    },
+    "badges": [
+      {
+        "pl": "konsultacja efektu i odcienia przed każdą usługą",
+        "en": "effect and shade consultation before every service"
+      },
+      {
+        "pl": "specialty coffee, matcha latte lub chilled prosecco",
+        "en": "specialty coffee, matcha latte or chilled prosecco"
+      },
+      {
+        "pl": "potwierdzenie wizyty przez WhatsApp, Telegram lub e-mail",
+        "en": "confirmation via WhatsApp, Telegram or email"
+      }
+    ],
+    "metrics": [
+      {
+        "value": "4.9/5",
+        "label": {
+          "pl": "średnia ocen na profilach Google i Booksy",
+          "en": "average across Google and Booksy profiles"
+        }
+      },
+      {
+        "value": "2 h",
+        "label": {
+          "pl": "średni czas odpowiedzi na nowe zapytanie",
+          "en": "average reply time for new enquiries"
+        }
+      },
+      {
+        "value": "Mon-Sat",
+        "label": {
+          "pl": "wizyty w sercu krakowskiego Zabłocia",
+          "en": "appointments in the heart of Zablocie"
+        }
+      }
+    ],
+    "mediaId": "hero-main"
+  },
+  "servicesIntro": {
+    "eyebrow": {
+      "pl": "Signature services",
+      "en": "Signature services"
+    },
+    "title": {
+      "pl": "Najczęściej wybierane rytuały, od których zaczyna się relacja z Teal & Tale.",
+      "en": "The signature rituals that make the strongest first impression at Teal & Tale."
+    },
+    "description": {
+      "pl": "Oferta jest pokazana jasno i komercyjnie: wiesz, jaki efekt rezerwujesz, ile trwa wizyta i jaka jest inwestycja, zanim przejdziesz do formularza.",
+      "en": "The offer is structured for quick decision-making: you see the result, the appointment length and the investment before you even reach the booking form."
+    }
+  },
+  "services": [
+    {
+      "id": "manicure-hybrydowy",
+      "category": {
+        "pl": "Paznokcie",
+        "en": "Nails"
+      },
+      "featured": true,
+      "price": 220,
+      "currency": "PLN",
+      "durationMin": 90,
+      "name": {
+        "pl": "Signature manicure hybrydowy",
+        "en": "Signature gel manicure"
+      },
+      "shortDescription": {
+        "pl": "Perfekcyjne opracowanie skórek, dopracowany kształt i kolor dobrany tak, by wyglądał luksusowo w codziennym świetle i na zdjęciach.",
+        "en": "Meticulous cuticle work, refined shaping and a colour chosen to look expensive in daylight and in close-up photos."
+      },
+      "experienceNote": {
+        "pl": "Najczęściej wybierana pierwsza rezerwacja przed eventem, wyjazdem albo po prostu dla siebie.",
+        "en": "The most requested first appointment before an event, a trip or simply as a reset for yourself."
+      },
+      "ctaLabel": {
+        "pl": "Umów manicure",
+        "en": "Book manicure"
+      },
+      "mediaId": "service-manicure"
+    },
+    {
+      "id": "koloryzacja-i-strzyzenie",
+      "category": {
+        "pl": "Włosy",
+        "en": "Hair"
+      },
+      "featured": true,
+      "price": 590,
+      "currency": "PLN",
+      "durationMin": 210,
+      "name": {
+        "pl": "Koloryzacja glossy + strzyżenie",
+        "en": "Glossy colour + cut"
+      },
+      "shortDescription": {
+        "pl": "Kolor budowany warstwowo z konsultacją tonu, pielęgnacją wygładzającą i cięciem, które nadaje włosom lekkość oraz ruch.",
+        "en": "Layered colour work with tone consultation, smoothing care and a cut that gives the hair movement, softness and expensive shine."
+      },
+      "experienceNote": {
+        "pl": "Dla gości, które chcą pełnej metamorfozy albo odświeżenia przed sezonem.",
+        "en": "For guests who want a full transformation or a polished seasonal refresh."
+      },
+      "ctaLabel": {
+        "pl": "Zarezerwuj konsultację",
+        "en": "Book a consultation"
+      },
+      "mediaId": "service-hair"
+    },
+    {
+      "id": "pedicure-hybrydowy",
+      "category": {
+        "pl": "Pedicure",
+        "en": "Pedicure"
+      },
+      "featured": true,
+      "price": 290,
+      "currency": "PLN",
+      "durationMin": 95,
+      "name": {
+        "pl": "Pedicure spa z kolorem",
+        "en": "Spa pedicure with gel colour"
+      },
+      "shortDescription": {
+        "pl": "Komfortowy pedicure z pielęgnacją, wygładzeniem i kolorem, który zostawia stopy zadbane, lekkie i gotowe na sandały lub city break.",
+        "en": "A comfort-first pedicure with care, smoothing and colour that leaves the feet polished, light and ready for sandals or a weekend away."
+      },
+      "experienceNote": {
+        "pl": "Idealny duet z manicure przed ślubem, wakacjami albo ważnym weekendem.",
+        "en": "An ideal pairing with manicure before a wedding, a holiday or any important weekend."
+      },
+      "ctaLabel": {
+        "pl": "Dodaj do wizyty",
+        "en": "Add to your visit"
+      },
+      "mediaId": "service-pedicure"
+    },
+    {
+      "id": "stylizacja-brwi",
+      "category": {
+        "pl": "Oprawa twarzy",
+        "en": "Face framing"
+      },
+      "featured": false,
+      "price": 150,
+      "currency": "PLN",
+      "durationMin": 45,
+      "name": {
+        "pl": "Brow sculpt & tint",
+        "en": "Brow sculpt & tint"
+      },
+      "shortDescription": {
+        "pl": "Subtelne modelowanie i tonowanie, dzięki którym twarz wygląda świeżo nawet przy bardzo lekkim makijażu.",
+        "en": "Soft sculpting and tinting for a fresher, more defined face even when the make-up stays minimal."
+      },
+      "experienceNote": {
+        "pl": "Szybki upgrade przed sesją, kolacją albo wyjazdem.",
+        "en": "A fast upgrade before a shoot, dinner or a weekend away."
+      },
+      "ctaLabel": {
+        "pl": "Wybierz usługę",
+        "en": "Choose service"
+      },
+      "mediaId": "service-brows"
+    }
+  ],
+  "experience": {
+    "eyebrow": {
+      "pl": "The experience",
+      "en": "The experience"
+    },
+    "title": {
+      "pl": "Kameralny beauty apartment, w którym liczy się nie pośpiech, tylko dopracowany finał.",
+      "en": "A private beauty apartment where the point is never speed, but a beautifully finished result."
+    },
+    "description": {
+      "pl": "W Teal & Tale wizyta ma rytm prywatnej konsultacji, nie zatłoczonego salonu. Cisza, miękkie światło, starannie dobrane kosmetyki i spokojne tempo sprawiają, że cały proces czuje się premium od wejścia do finalnego looku.",
+      "en": "At Teal & Tale the appointment feels closer to a private consultation than a crowded salon visit. Quiet energy, soft light, carefully selected products and an unhurried pace make the entire process feel premium from arrival to the final reveal."
+    },
+    "pillars": [
+      {
+        "title": {
+          "pl": "Private pace",
+          "en": "Private pace"
+        },
+        "copy": {
+          "pl": "Każda usługa ma przestrzeń na konsultację, korekty i spokojne dopracowanie detalu bez pośpiechu.",
+          "en": "Each appointment leaves room for consultation, refinement and final detail work without rushing the guest."
+        }
+      },
+      {
+        "title": {
+          "pl": "Luxury product edit",
+          "en": "Luxury product edit"
+        },
+        "copy": {
+          "pl": "Pracujemy na starannie dobranych formułach, które dają czysty połysk, trwałość i komfort noszenia.",
+          "en": "The product mix is chosen for clean shine, wearability, lasting comfort and a polished finish."
+        }
+      },
+      {
+        "title": {
+          "pl": "Hospitality touches",
+          "en": "Hospitality touches"
+        },
+        "copy": {
+          "pl": "Napój, zapach wnętrza i sposób prowadzenia wizyty są częścią doświadczenia, nie dodatkiem.",
+          "en": "The drink, the scent and the tone of the visit are treated as part of the experience, not an afterthought."
+        }
+      }
+    ],
+    "highlights": [
+      {
+        "pl": "kameralny adres w Zabłociu, kilka minut od Kazimierza",
+        "en": "an intimate Zablocie address a few minutes from Kazimierz"
+      },
+      {
+        "pl": "PL / EN guest care dla lokalnych klientek i city girls in town",
+        "en": "PL / EN guest care for local regulars and girls in town"
+      },
+      {
+        "pl": "efekt gotowy na close-up, stories i real life, nie tylko na jedno zdjęcie",
+        "en": "a finish that works in close-up, on stories and in real life, not just for one photo"
+      }
+    ],
+    "mediaIds": ["experience-room", "experience-products"]
+  },
+  "trust": {
+    "eyebrow": {
+      "pl": "Reviews & trust",
+      "en": "Reviews & trust"
+    },
+    "title": {
+      "pl": "Goście wracają dla precyzji, spokoju i efektu, który wygląda drogo, ale nigdy ciężko.",
+      "en": "Guests come back for the precision, the calm and the kind of result that looks expensive without ever feeling overdone."
+    },
+    "description": {
+      "pl": "Sekcja opinii porządkuje najważniejsze źródła zaufania przed pierwszą rezerwacją. Pokazuje, gdzie sprawdzić ocenę salonu i czego najczęściej dotyczą pozytywne komentarze.",
+      "en": "This section organises the key trust signals before a first booking. It shows where guests check the salon rating and what the strongest reviews tend to mention."
+    },
+    "platforms": [
+      {
+        "id": "google",
+        "name": "Google",
+        "rating": "4.9",
+        "reviewCount": "187",
+        "sourceLabel": {
+          "pl": "ocena gości z Google Maps",
+          "en": "guest rating on Google Maps"
+        },
+        "ctaLabel": {
+          "pl": "Otwórz profil Google",
+          "en": "Open Google profile"
+        },
+        "link": "https://maps.google.com/?q=Teal+%26+Tale+Aesthetics+Krakow",
+        "notes": [
+          {
+            "pl": "najczęściej chwalone za spokojną atmosferę i bardzo precyzyjny efekt",
+            "en": "most often praised for the calm atmosphere and highly precise finish"
+          },
+          {
+            "pl": "dużo opinii od klientek wracających regularnie co 3-4 tygodnie",
+            "en": "many comments come from regular guests returning every 3 to 4 weeks"
+          }
+        ]
+      },
+      {
+        "id": "booksy",
+        "name": "Booksy",
+        "rating": "5.0",
+        "reviewCount": "96",
+        "sourceLabel": {
+          "pl": "oceny i rezerwacje przez Booksy",
+          "en": "ratings and bookings via Booksy"
+        },
+        "ctaLabel": {
+          "pl": "Otwórz profil Booksy",
+          "en": "Open Booksy profile"
+        },
+        "link": "https://booksy.com/pl-pl/990001_teal-and-tale-aesthetics_salon-kosmetyczny_8820_krakow",
+        "notes": [
+          {
+            "pl": "silny sygnał jakości dla nowych gości, które chcą szybko porównać standard",
+            "en": "a strong quality signal for new guests who want to compare standards quickly"
+          },
+          {
+            "pl": "czytelny punkt odniesienia dla dostępności, terminów i powracających wizyt",
+            "en": "a clear reference point for availability, scheduling and repeat appointments"
+          }
+        ]
+      }
+    ]
+  },
+  "instagram": {
+    "eyebrow": {
+      "pl": "Instagram edit",
+      "en": "Instagram edit"
+    },
+    "title": {
+      "pl": "Feed, który pokazuje klimat marki, zanim pokaże pełne portfolio usług.",
+      "en": "A feed that sells the mood of the brand before it even shows the full service portfolio."
+    },
+    "description": {
+      "pl": "To bardziej editorialny moodboard niż techniczna galeria. Sekcja buduje pożądanie, pokazuje detal i zostawia przestrzeń na późniejsze podmiany na realne kadry z salonu.",
+      "en": "This section acts more like an editorial moodboard than a technical gallery. It builds desire through detail now and can later be replaced with real salon photography."
+    },
+    "ctaLabel": {
+      "pl": "Zobacz Instagram",
+      "en": "View Instagram"
+    },
+    "posts": [
+      {
+        "id": "insta-1",
+        "title": {
+          "pl": "Milky nude z miękkim fleszem",
+          "en": "Milky nude with a soft flash"
+        },
+        "imageId": "insta-soft-teal",
+        "link": "https://www.instagram.com/tealandtale.krakow/"
+      },
+      {
+        "id": "insta-2",
+        "title": {
+          "pl": "Glossy hair moment po świeżym colour refresh",
+          "en": "A glossy hair moment after a fresh colour refresh"
+        },
+        "imageId": "insta-hair-gloss",
+        "link": "https://www.instagram.com/tealandtale.krakow/"
+      },
+      {
+        "id": "insta-3",
+        "title": {
+          "pl": "Prosecco, światło i detal wnętrza",
+          "en": "Prosecco, light and a small interior detail"
+        },
+        "imageId": "insta-prosecco",
+        "link": "https://www.instagram.com/tealandtale.krakow/"
+      },
+      {
+        "id": "insta-4",
+        "title": {
+          "pl": "Pedicure colour story przed weekendem",
+          "en": "A pedicure colour story before the weekend"
+        },
+        "imageId": "insta-pedicure",
+        "link": "https://www.instagram.com/tealandtale.krakow/"
+      }
+    ]
+  },
+  "booking": {
+    "eyebrow": {
+      "pl": "Booking",
+      "en": "Booking"
+    },
+    "title": {
+      "pl": "Wyślij krótkie zgłoszenie, a wrócimy z propozycją terminu i potwierdzeniem.",
+      "en": "Send a short request and we will come back with a suggested time and confirmation."
+    },
+    "description": {
+      "pl": "Formularz skraca drogę do wizyty: wybierasz usługę, zostawiasz preferowany termin i od razu otwierasz kanał, w którym najwygodniej kontynuować rozmowę.",
+      "en": "The form shortens the path to an appointment: choose your service, leave your preferred timing and instantly continue the conversation in the channel that suits you best."
+    },
+    "helper": {
+      "pl": "Najczęściej odpisujemy w ciągu 2 godzin w godzinach pracy salonu.",
+      "en": "We usually reply within 2 hours during salon opening hours."
+    },
+    "assurances": [
+      {
+        "pl": "odpowiedź w godzinach pracy salonu",
+        "en": "reply during salon opening hours"
+      },
+      {
+        "pl": "PL / EN guest care",
+        "en": "PL / EN guest care"
+      },
+      {
+        "pl": "potwierdzenie przez WhatsApp, Telegram lub e-mail",
+        "en": "confirmation via WhatsApp, Telegram or email"
+      }
+    ],
+    "channelLabel": {
+      "pl": "Wybierz preferowany kanał kontaktu",
+      "en": "Choose your preferred contact channel"
+    },
+    "submitLabel": {
+      "pl": "Przygotuj wiadomość",
+      "en": "Prepare message"
+    },
+    "submittingLabel": {
+      "pl": "Zapisujemy zgłoszenie...",
+      "en": "Saving your request..."
+    },
+    "successMessage": {
+      "pl": "Twoje zgłoszenie zostało zapisane. Otwieramy wybrany kanał z gotową wiadomością, którą możesz jeszcze edytować przed wysłaniem.",
+      "en": "Your request has been saved. We are opening your chosen channel with a pre-filled message that you can still edit before sending."
+    },
+    "errorMessage": {
+      "pl": "Nie udało się zapisać zgłoszenia. Spróbuj ponownie za chwilę.",
+      "en": "We could not save your request. Please try again in a moment."
+    },
+    "messageIntro": {
+      "pl": "Dzień dobry, chcę umówić wizytę w Teal & Tale Aesthetics.",
+      "en": "Hello, I would like to book an appointment at Teal & Tale Aesthetics."
+    },
+    "emailSubject": {
+      "pl": "Prośba o rezerwację wizyty",
+      "en": "Appointment booking request"
+    },
+    "fieldLabels": {
+      "name": {
+        "pl": "Imię i nazwisko",
+        "en": "Full name"
+      },
+      "email": {
+        "pl": "E-mail",
+        "en": "Email"
+      },
+      "phone": {
+        "pl": "Telefon",
+        "en": "Phone"
+      },
+      "date": {
+        "pl": "Preferowana data",
+        "en": "Preferred date"
+      },
+      "time": {
+        "pl": "Preferowana godzina",
+        "en": "Preferred time"
+      },
+      "notes": {
+        "pl": "Notatka",
+        "en": "Notes"
+      },
+      "service": {
+        "pl": "Usługa",
+        "en": "Service"
+      }
+    },
+    "notesPlaceholder": {
+      "pl": "Napisz, czy to pierwsza wizyta, jaki efekt chcesz uzyskać albo czy zależy Ci na konkretnym dniu.",
+      "en": "Tell us if this is your first visit, the result you want, or whether you need a specific day."
+    },
+    "channels": [
+      {
+        "id": "whatsapp",
+        "label": {
+          "pl": "WhatsApp",
+          "en": "WhatsApp"
+        },
+        "description": {
+          "pl": "Najwygodniejsza opcja, jeśli chcesz szybko potwierdzić termin i dopytać o detal.",
+          "en": "The easiest option if you want quick confirmation and an easy way to ask about details."
+        }
+      },
+      {
+        "id": "telegram",
+        "label": {
+          "pl": "Telegram",
+          "en": "Telegram"
+        },
+        "description": {
+          "pl": "Dobre rozwiązanie, jeśli całą komunikację beauty trzymasz w jednej aplikacji.",
+          "en": "A good fit if you prefer keeping all your beauty conversations in one app."
+        }
+      },
+      {
+        "id": "email",
+        "label": {
+          "pl": "E-mail",
+          "en": "Email"
+        },
+        "description": {
+          "pl": "Najlepsze, gdy chcesz mieć wszystkie ustalenia zapisane w skrzynce.",
+          "en": "Best when you want the details saved neatly in your inbox."
+        }
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": {
+      "pl": "FAQ",
+      "en": "FAQ"
+    },
+    "title": {
+      "pl": "Kilka rzeczy, które warto wiedzieć przed pierwszą wizytą.",
+      "en": "A few things worth knowing before your first appointment."
+    },
+    "items": [
+      {
+        "question": {
+          "pl": "Którą usługę wybrać na pierwszą wizytę?",
+          "en": "Which service should I choose for my first visit?"
+        },
+        "answer": {
+          "pl": "Najczęściej nowi goście zaczynają od signature manicure albo konsultacji colour + cut. Jeśli nie masz pewności, opisz swój cel w notatce, a pomożemy dobrać najlepszą opcję.",
+          "en": "Most new guests begin with the signature manicure or a colour + cut consultation. If you are unsure, add your goal in the notes and we will guide you toward the best option."
+        }
+      },
+      {
+        "question": {
+          "pl": "Jak wygląda potwierdzenie terminu?",
+          "en": "How does appointment confirmation work?"
+        },
+        "answer": {
+          "pl": "Po wysłaniu formularza otwieramy wybrany kanał kontaktu z gotową wiadomością. Następnie wracamy z propozycją terminu i potwierdzeniem wizyty.",
+          "en": "After you submit the form, we open your chosen contact channel with a pre-filled message. We then return with a suggested time and confirm the appointment there."
+        }
+      },
+      {
+        "question": {
+          "pl": "Czy mogę połączyć manicure i pedicure w jednej wizycie?",
+          "en": "Can I combine manicure and pedicure in one visit?"
+        },
+        "answer": {
+          "pl": "Tak, to częsty wybór przed podróżą, ślubem lub ważnym weekendem. W notatce dopisz oba zabiegi, a dopasujemy najlepszy slot czasowy.",
+          "en": "Yes, it is a popular choice before travel, weddings or an important weekend. Mention both services in the notes and we will suggest the best time slot."
+        }
+      },
+      {
+        "question": {
+          "pl": "Jak przygotować się do koloryzacji?",
+          "en": "How should I prepare for a colour appointment?"
+        },
+        "answer": {
+          "pl": "Najlepiej przyjść z włosami bez ciężkich produktów stylizujących i, jeśli chcesz, z 1-2 inspiracjami pokazującymi kierunek efektu. Resztę dopracujemy podczas konsultacji.",
+          "en": "It is best to arrive without heavy styling products and, if helpful, with one or two inspiration references that show the direction you want. We refine everything else during the consultation."
+        }
+      },
+      {
+        "question": {
+          "pl": "Czy na miejscu serwowana jest kawa albo prosecco?",
+          "en": "Is coffee or prosecco served during the visit?"
+        },
+        "answer": {
+          "pl": "Tak. Specialty coffee, matcha latte lub chilled prosecco to część rytuału gościnności, który buduje spokojny premium feeling od pierwszych minut.",
+          "en": "Yes. Specialty coffee, matcha latte or chilled prosecco are part of the hospitality ritual that sets the premium mood from the first minutes."
+        }
+      }
+    ]
+  },
+  "legal": {
+    "privacyLinkLabel": {
+      "pl": "Polityka prywatności",
+      "en": "Privacy policy"
+    },
+    "consents": {
+      "processing": {
+        "pl": "Wyrażam zgodę na przetwarzanie moich danych w celu obsługi zapytania o wizytę.",
+        "en": "I consent to the processing of my personal data for handling my appointment enquiry."
+      },
+      "contact": {
+        "pl": "Zgadzam się na kontakt przez wybrany kanał w sprawie potwierdzenia wizyty.",
+        "en": "I agree to be contacted through the selected channel to confirm my appointment."
+      }
+    },
+    "policyIntro": {
+      "pl": "Ta polityka opisuje podstawowe zasady przetwarzania danych na stronie Teal & Tale Aesthetics. Przed wdrożeniem produkcyjnym należy uzupełnić finalne dane rejestrowe administratora oraz zweryfikować treść z doradcą prawnym.",
+      "en": "This policy outlines the core data handling principles used on the Teal & Tale Aesthetics website. Before production launch, the final company registration details should be added and the wording verified with legal counsel."
+    },
+    "policySections": [
+      {
+        "title": {
+          "pl": "Administrator danych",
+          "en": "Data controller"
+        },
+        "copy": {
+          "pl": "Administratorem danych dla potrzeb formularza kontaktowego jest Teal & Tale Aesthetics, ul. Zabłocie 24/U2, 30-701 Kraków. Kontakt w sprawach prywatności: privacy@tealandtale.pl.",
+          "en": "For the purpose of the contact form, the data controller is Teal & Tale Aesthetics, 24 Zablocie Street, Unit U2, 30-701 Krakow. Privacy contact: privacy@tealandtale.pl."
+        }
+      },
+      {
+        "title": {
+          "pl": "Zakres danych",
+          "en": "Data scope"
+        },
+        "copy": {
+          "pl": "Przetwarzamy dane podane w formularzu: imię i nazwisko, numer telefonu, adres e-mail, preferowaną datę i godzinę, wybraną usługę oraz dobrowolną notatkę.",
+          "en": "We process the data provided through the form: your full name, phone number, email address, preferred date and time, selected service and any optional note you choose to add."
+        }
+      },
+      {
+        "title": {
+          "pl": "Cel i podstawa przetwarzania",
+          "en": "Purpose and legal basis"
+        },
+        "copy": {
+          "pl": "Dane wykorzystujemy do obsługi zapytania rezerwacyjnego, kontaktu w sprawie terminu oraz potwierdzenia wizyty. Podstawą przetwarzania jest zgoda udzielona w formularzu oraz uzasadniony interes związany z obsługą zapytania.",
+          "en": "We use the data to handle your booking enquiry, contact you about availability and confirm the appointment. The legal basis is the consent provided in the form and the legitimate interest of handling your request."
+        }
+      },
+      {
+        "title": {
+          "pl": "Okres przechowywania",
+          "en": "Storage period"
+        },
+        "copy": {
+          "pl": "Dane przechowujemy nie dłużej, niż jest to potrzebne do obsługi zapytania i ewentualnej rezerwacji, chyba że przepisy prawa wymagają dłuższego okresu archiwizacji.",
+          "en": "We keep the data no longer than necessary to handle your enquiry and any resulting appointment, unless a longer retention period is required by law."
+        }
+      },
+      {
+        "title": {
+          "pl": "Prawa użytkownika",
+          "en": "Your rights"
+        },
+        "copy": {
+          "pl": "Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przeniesienia danych oraz wniesienia skargi do właściwego organu nadzorczego.",
+          "en": "You have the right to access, correct, delete, restrict or transfer your data and to lodge a complaint with the competent data protection authority."
+        }
+      },
+      {
+        "title": {
+          "pl": "Cookies i narzędzia zewnętrzne",
+          "en": "Cookies and third-party tools"
+        },
+        "copy": {
+          "pl": "W aktualnej wersji strony nie stosujemy rozbudowanej analityki behawioralnej. Jeśli w przyszłości zostaną dodane narzędzia marketingowe lub remarketingowe, polityka i baner cookies powinny zostać odpowiednio rozszerzone.",
+          "en": "The current version of the site does not rely on extensive behavioural analytics. If marketing or remarketing tools are added later, both this policy and the cookie banner should be expanded accordingly."
+        }
+      }
+    ]
+  },
+  "footer": {
+    "copy": {
+      "pl": "Teal & Tale Aesthetics. Editorial beauty rituals w Krakowie, Zabłocie.",
+      "en": "Teal & Tale Aesthetics. Editorial beauty rituals in Krakow, Zablocie."
+    },
+    "cta": {
+      "pl": "Umów wizytę",
+      "en": "Book your visit"
+    }
+  },
+  "media": [
+    {
+      "id": "hero-main",
+      "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      "alt": {
+        "pl": "Kobieta w eleganckim beauty studio o miękkim, editorialnym świetle",
+        "en": "A woman in an elegant beauty studio with soft editorial lighting"
+      },
+      "width": 1200,
+      "height": 1500,
+      "priority": true,
+      "mood": "editorial portrait",
+      "overlay": "teal"
+    },
+    {
+      "id": "service-manicure",
+      "src": "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=80",
+      "alt": {
+        "pl": "Zbliżenie na elegancki manicure w mlecznych odcieniach nude",
+        "en": "A close-up of an elegant manicure in soft milky nude tones"
+      },
+      "width": 900,
+      "height": 1100,
+      "priority": false,
+      "mood": "nails",
+      "overlay": "gold"
+    },
+    {
+      "id": "service-hair",
+      "src": "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=80",
+      "alt": {
+        "pl": "Luksusowa koloryzacja włosów z efektem glossy i miękkim ruchem",
+        "en": "A glossy premium hair colour result with soft movement"
+      },
+      "width": 900,
+      "height": 1100,
+      "priority": false,
+      "mood": "hair",
+      "overlay": "teal"
+    },
+    {
+      "id": "service-pedicure",
+      "src": "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?auto=format&fit=crop&w=900&q=80",
+      "alt": {
+        "pl": "Pedicure spa w spokojnym, luksusowym otoczeniu",
+        "en": "A spa pedicure in a calm, premium setting"
+      },
+      "width": 900,
+      "height": 1100,
+      "priority": false,
+      "mood": "pedicure",
+      "overlay": "sand"
+    },
+    {
+      "id": "service-brows",
+      "src": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80",
+      "alt": {
+        "pl": "Subtelna stylizacja brwi w kameralnym studio beauty",
+        "en": "Soft brow styling in an intimate beauty studio"
+      },
+      "width": 900,
+      "height": 1100,
+      "priority": false,
+      "mood": "brows",
+      "overlay": "gold"
+    },
+    {
+      "id": "experience-room",
+      "src": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1200&q=80",
+      "alt": {
+        "pl": "Wnętrze salonu z miękkim światłem i cichą atmosferą quiet luxury",
+        "en": "A salon interior with soft light and a quiet luxury mood"
+      },
+      "width": 1200,
+      "height": 900,
+      "priority": false,
+      "mood": "interior",
+      "overlay": "teal"
+    },
+    {
+      "id": "experience-products",
+      "src": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80",
+      "alt": {
+        "pl": "Premium kosmetyki ułożone jak editorialna martwa natura",
+        "en": "Premium cosmetics arranged like an editorial still life"
+      },
+      "width": 1200,
+      "height": 900,
+      "priority": false,
+      "mood": "products",
+      "overlay": "gold"
+    },
+    {
+      "id": "insta-soft-teal",
+      "src": "https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=800&q=80",
+      "alt": {
+        "pl": "Detale manicure w estetyce soft teal i milky nude",
+        "en": "Manicure details in a soft teal and milky nude palette"
+      },
+      "width": 800,
+      "height": 1000,
+      "priority": false,
+      "mood": "instagram",
+      "overlay": "teal"
+    },
+    {
+      "id": "insta-hair-gloss",
+      "src": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+      "alt": {
+        "pl": "Editorialne, błyszczące włosy po colour refresh",
+        "en": "Editorial glossy hair after a colour refresh"
+      },
+      "width": 800,
+      "height": 1000,
+      "priority": false,
+      "mood": "instagram",
+      "overlay": "gold"
+    },
+    {
+      "id": "insta-prosecco",
+      "src": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80",
+      "alt": {
+        "pl": "Kieliszek prosecco i detal wnętrza premium",
+        "en": "A prosecco glass and a premium interior detail"
+      },
+      "width": 800,
+      "height": 1000,
+      "priority": false,
+      "mood": "instagram",
+      "overlay": "sand"
+    },
+    {
+      "id": "insta-pedicure",
+      "src": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
+      "alt": {
+        "pl": "Historia koloru dla pedicure i pielęgnacji stóp",
+        "en": "A colour story for pedicure and foot care"
+      },
+      "width": 800,
+      "height": 1000,
+      "priority": false,
+      "mood": "instagram",
+      "overlay": "teal"
+    }
+  ],
+  "settings": {
+    "defaultLocale": "pl",
+    "stickyCtaAfterScroll": 260,
+    "demoMode": true
+  }
+}

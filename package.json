@@ -1,0 +1,26 @@
+{
+  "name": "teal-and-tale-aesthetics",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Premium bilingual landing page for Teal & Tale Aesthetics",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/node": "^10.0.1",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^6.0.4",
+    "gsap": "^3.14.2",
+    "tailwindcss": "^4.2.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.7",
+    "@types/node": "^25.5.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,34 @@
+---
+import { content, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container-shell footer-grid">
+    <div>
+      <p class="section-eyebrow">{content.brand.name}</p>
+      <p>{t(content.footer.copy, locale)}</p>
+    </div>
+
+    <div>
+      <strong>{t(content.brand.addressLabel, locale)}</strong>
+      <p>{t(content.brand.addressLine, locale)}</p>
+      <p>{content.brand.contact.phone}</p>
+      <p>{content.brand.contact.bookingEmail}</p>
+    </div>
+
+    <div>
+      <strong>{t(content.hero.primaryCta, locale)}</strong>
+      <div class="footer-links">
+        <a href="#booking">{t(content.footer.cta, locale)}</a>
+        <a href={`/${locale}/privacy-policy/`}>{t(content.legal.privacyLinkLabel, locale)}</a>
+        <a href={content.brand.contact.instagram} target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>

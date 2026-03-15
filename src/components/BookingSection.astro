@@ -1,0 +1,301 @@
+---
+import { content, type Locale, t } from "../lib/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<section class="section-shell" id="booking">
+  <div class="container-shell booking-layout">
+    <div class="booking-copy" data-reveal>
+      <p class="section-eyebrow">{t(content.booking.eyebrow, locale)}</p>
+      <h2>{t(content.booking.title, locale)}</h2>
+      <p class="section-lead">{t(content.booking.description, locale)}</p>
+      <p class="booking-helper">{t(content.booking.helper, locale)}</p>
+
+      <div class="booking-statuses glass-card">
+        {
+          content.booking.assurances.map((item) => (
+            <span>{t(item, locale)}</span>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="glass-card booking-form-card" data-reveal>
+      <form
+        class="booking-form"
+        data-booking-form
+        data-locale={locale}
+        data-api-endpoint="/api/leads"
+        data-submit-label={t(content.booking.submitLabel, locale)}
+        data-submitting-label={t(content.booking.submittingLabel, locale)}
+        data-success-message={t(content.booking.successMessage, locale)}
+        data-error-message={t(content.booking.errorMessage, locale)}
+        data-message-intro={t(content.booking.messageIntro, locale)}
+        data-email-subject={t(content.booking.emailSubject, locale)}
+        data-whatsapp={content.brand.contact.whatsApp}
+        data-telegram={content.brand.contact.telegram}
+        data-email={content.brand.contact.bookingEmail}
+      >
+        <label>
+          <span>{t(content.booking.fieldLabels.service, locale)}</span>
+          <select name="service" required>
+            {
+              content.services.map((service) => (
+                <option value={service.id}>{t(service.name, locale)}</option>
+              ))
+            }
+          </select>
+        </label>
+
+        <div class="form-grid">
+          <label>
+            <span>{t(content.booking.fieldLabels.name, locale)}</span>
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            <span>{t(content.booking.fieldLabels.email, locale)}</span>
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+          <label>
+            <span>{t(content.booking.fieldLabels.phone, locale)}</span>
+            <input name="phone" type="tel" autocomplete="tel" required />
+          </label>
+          <label>
+            <span>{t(content.booking.fieldLabels.date, locale)}</span>
+            <input name="date" type="date" required />
+          </label>
+          <label>
+            <span>{t(content.booking.fieldLabels.time, locale)}</span>
+            <input name="time" type="time" required />
+          </label>
+        </div>
+
+        <fieldset class="channel-grid">
+          <legend>{t(content.booking.channelLabel, locale)}</legend>
+          {
+            content.booking.channels.map((channel, index) => (
+              <label class="channel-card">
+                <input type="radio" name="channel" value={channel.id} checked={index === 0} />
+                <strong>{t(channel.label, locale)}</strong>
+                <span>{t(channel.description, locale)}</span>
+              </label>
+            ))
+          }
+        </fieldset>
+
+        <label>
+          <span>{t(content.booking.fieldLabels.notes, locale)}</span>
+          <textarea
+            name="notes"
+            rows="4"
+            placeholder={t(content.booking.notesPlaceholder, locale)}
+          ></textarea>
+        </label>
+
+        <label class="consent-row">
+          <input type="checkbox" name="processingConsent" required />
+          <span>{t(content.legal.consents.processing, locale)}</span>
+        </label>
+
+        <label class="consent-row">
+          <input type="checkbox" name="contactConsent" required />
+          <span>{t(content.legal.consents.contact, locale)}</span>
+        </label>
+
+        <button class="pill-button booking-submit" type="submit" data-submit-button>
+          <span data-submit-button-label>{t(content.booking.submitLabel, locale)}</span>
+        </button>
+
+        <p class="booking-feedback" data-booking-feedback aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const bookingForms = document.querySelectorAll("[data-booking-form]");
+
+  type BookingLocale = "pl" | "en";
+  type ContactChannel = "whatsapp" | "telegram" | "email";
+  type FeedbackState = "pending" | "success" | "error";
+
+  function getFieldLabels(locale: BookingLocale) {
+    return {
+      service: locale === "pl" ? "Usluga" : "Service",
+      name: locale === "pl" ? "Imie" : "Name",
+      email: "Email",
+      phone: locale === "pl" ? "Telefon" : "Phone",
+      date: locale === "pl" ? "Data" : "Date",
+      time: locale === "pl" ? "Godzina" : "Time",
+      notes: locale === "pl" ? "Notatka" : "Notes",
+    };
+  }
+
+  function applyRequestedService(serviceSelect: Element | null) {
+    if (!(serviceSelect instanceof HTMLSelectElement)) return;
+
+    const requestedService = new URL(window.location.href).searchParams.get("service");
+    if (!requestedService) return;
+
+    const matchingOption = serviceSelect.querySelector(`option[value="${requestedService}"]`);
+    if (matchingOption instanceof HTMLOptionElement) {
+      serviceSelect.value = requestedService;
+    }
+  }
+
+  function buildMessage(form: HTMLFormElement, formData: FormData, locale: BookingLocale) {
+    const labels = getFieldLabels(locale);
+    const serviceSelect = form.querySelector("select[name='service']");
+    const serviceLabel =
+      serviceSelect instanceof HTMLSelectElement
+        ? serviceSelect.selectedOptions[0]?.textContent?.trim() ?? ""
+        : "";
+
+    const lines = [
+      form.dataset.messageIntro ?? "",
+      `${labels.service}: ${serviceLabel}`,
+      `${labels.name}: ${String(formData.get("name") ?? "")}`,
+      `${labels.email}: ${String(formData.get("email") ?? "")}`,
+      `${labels.phone}: ${String(formData.get("phone") ?? "")}`,
+      `${labels.date}: ${String(formData.get("date") ?? "")}`,
+      `${labels.time}: ${String(formData.get("time") ?? "")}`,
+    ];
+
+    const notes = String(formData.get("notes") ?? "");
+    if (notes) {
+      lines.push(`${labels.notes}: ${notes}`);
+    }
+
+    return encodeURIComponent(lines.join("\n"));
+  }
+
+  function buildTarget(form: HTMLFormElement, channel: ContactChannel, message: string) {
+    if (channel === "telegram") {
+      return `https://t.me/${form.dataset.telegram}?text=${message}`;
+    }
+
+    if (channel === "email") {
+      return `mailto:${form.dataset.email}?subject=${encodeURIComponent(
+        form.dataset.emailSubject ?? "",
+      )}&body=${message}`;
+    }
+
+    return `https://wa.me/${form.dataset.whatsapp}?text=${message}`;
+  }
+
+  function setFeedback(feedback: Element | null, state: FeedbackState, message: string) {
+    if (!(feedback instanceof HTMLElement)) return;
+
+    feedback.dataset.state = state;
+    feedback.textContent = message;
+  }
+
+  function setSubmittingState(form: HTMLFormElement, isSubmitting: boolean) {
+    const submitButton = form.querySelector("[data-submit-button]");
+    const submitButtonLabel = form.querySelector("[data-submit-button-label]");
+
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = isSubmitting;
+    }
+
+    if (submitButtonLabel instanceof HTMLElement) {
+      submitButtonLabel.textContent = isSubmitting
+        ? form.dataset.submittingLabel ?? ""
+        : form.dataset.submitLabel ?? "";
+    }
+  }
+
+  bookingForms.forEach((form) => {
+    const serviceSelect = form.querySelector("select[name='service']");
+    applyRequestedService(serviceSelect);
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const currentForm = event.currentTarget;
+      if (!(currentForm instanceof HTMLFormElement)) return;
+
+      const formData = new FormData(currentForm);
+      const locale = currentForm.dataset.locale === "en" ? "en" : "pl";
+      const channel = String(formData.get("channel") ?? "whatsapp") as ContactChannel;
+      const feedback = currentForm.querySelector("[data-booking-feedback]");
+      const message = buildMessage(currentForm, formData, locale);
+      const target = buildTarget(currentForm, channel, message);
+      const payload = {
+        serviceId: String(formData.get("service") ?? ""),
+        customerName: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        phone: String(formData.get("phone") ?? ""),
+        preferredDate: String(formData.get("date") ?? ""),
+        preferredTime: String(formData.get("time") ?? ""),
+        notes: String(formData.get("notes") ?? ""),
+        preferredContactChannel: channel,
+        locale,
+        processingConsent: formData.get("processingConsent") === "on",
+        contactConsent: formData.get("contactConsent") === "on",
+      };
+
+      const pendingWindow =
+        channel === "email" ? null : window.open("", "_blank", "width=980,height=760");
+
+      setSubmittingState(currentForm, true);
+      setFeedback(feedback, "pending", currentForm.dataset.submittingLabel ?? "");
+
+      try {
+        const response = await fetch(currentForm.dataset.apiEndpoint ?? "/api/leads", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => null);
+
+        if (!response.ok) {
+          const firstFieldError = Object.values(result?.issues?.fieldErrors ?? {})
+            .flat()
+            .find(Boolean);
+
+          throw new Error(
+            firstFieldError ?? result?.message ?? currentForm.dataset.errorMessage ?? "Lead save failed.",
+          );
+        }
+
+        setFeedback(feedback, "success", currentForm.dataset.successMessage ?? "");
+
+        if (channel === "email") {
+          window.location.href = target;
+          return;
+        }
+
+        if (pendingWindow && !pendingWindow.closed) {
+          pendingWindow.location.href = target;
+          return;
+        }
+
+        window.open(target, "_blank", "noopener,noreferrer");
+      } catch (error) {
+        if (pendingWindow && !pendingWindow.closed) {
+          pendingWindow.close();
+        }
+
+        setFeedback(
+          feedback,
+          "error",
+          error instanceof Error
+            ? error.message
+            : currentForm.dataset.errorMessage ?? "Lead save failed.",
+        );
+      } finally {
+        setSubmittingState(currentForm, false);
+      }
+    });
+  });
+</script>
