@@ -275,10 +275,11 @@ main {
 }
 
 .hero-grid {
-  grid-template-columns: minmax(0, 1.14fr) minmax(18rem, 0.86fr);
+  grid-template-columns: minmax(0, 1.08fr) minmax(16rem, 0.74fr);
   align-items: center;
   min-height: auto;
   padding-top: 0.25rem;
+  gap: 2rem;
 }
 
 .hero-copy {
@@ -286,12 +287,14 @@ main {
   display: grid;
   gap: 1.2rem;
   align-content: start;
+  max-width: 42rem;
 }
 
 .hero-copy h1 {
-  font-size: clamp(2.95rem, 5.9vw, 5.15rem);
-  line-height: 0.94;
+  font-size: clamp(2.7rem, 5.1vw, 4.6rem);
+  line-height: 0.96;
   text-wrap: balance;
+  max-width: 11ch;
 }
 
 .hero-copy .section-lead {
@@ -305,9 +308,10 @@ main {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  gap: 0.75rem;
-  max-width: 33rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  max-width: 35rem;
 }
 
 .hero-badges li,
@@ -319,6 +323,11 @@ main {
   border: 1px solid rgba(24, 50, 54, 0.08);
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.hero-badges li {
+  width: fit-content;
+  max-width: 100%;
 }
 
 .hero-metrics article {
@@ -349,7 +358,7 @@ main {
   padding-left: 1rem;
   padding-top: 0.35rem;
   min-height: 100%;
-  width: min(100%, 32rem);
+  width: min(100%, 26rem);
   justify-self: end;
 }
 
@@ -370,7 +379,7 @@ main {
 
 .image-frame--hero {
   border-radius: 2.2rem 8rem 2.2rem 2.2rem;
-  aspect-ratio: 4.3 / 5;
+  aspect-ratio: 4.1 / 5;
 }
 
 .image-frame--service,
@@ -390,9 +399,9 @@ main {
 
 .hero-floating-card {
   position: absolute;
-  left: -0.75rem;
-  bottom: 1.15rem;
-  width: min(15.5rem, 82%);
+  left: -1rem;
+  bottom: 0.85rem;
+  width: min(16.5rem, 86%);
   padding: 0.9rem;
   display: grid;
   gap: 0.35rem;
@@ -1004,6 +1013,7 @@ main {
   .hero-grid {
     grid-template-columns: 1fr;
     padding-top: 0;
+    gap: 1.2rem;
   }
 
   .hero-floating-card {
@@ -1059,6 +1069,10 @@ main {
   .hero-actions,
   .hero-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .hero-badges {
+    display: grid;
   }
 
   .image-frame--hero,
