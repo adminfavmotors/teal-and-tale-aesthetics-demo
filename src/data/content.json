@@ -419,7 +419,7 @@
       {
         "id": "insta-1",
         "title": {
-          "pl": "Milky nude z miekkim fleszem",
+          "pl": "Milky nude",
           "en": "Milky nude with a soft flash"
         },
         "imageId": "insta-soft-teal",
@@ -428,8 +428,8 @@
       {
         "id": "insta-2",
         "title": {
-          "pl": "Glossy hair moment po fresh colour refresh",
-          "en": "A glossy hair moment after a fresh colour refresh"
+          "pl": "Glossy hair refresh",
+          "en": "Glossy hair refresh"
         },
         "imageId": "insta-hair-gloss",
         "link": "https://www.instagram.com/tealandtale.krakow/"
@@ -437,8 +437,8 @@
       {
         "id": "insta-3",
         "title": {
-          "pl": "Prosecco, swiatlo i detal wnetrza",
-          "en": "Prosecco, light and a small interior detail"
+          "pl": "Prosecco i detal",
+          "en": "Prosecco and detail"
         },
         "imageId": "insta-prosecco",
         "link": "https://www.instagram.com/tealandtale.krakow/"
@@ -446,8 +446,8 @@
       {
         "id": "insta-4",
         "title": {
-          "pl": "Pedicure colour story przed weekendem",
-          "en": "A pedicure colour story before the weekend"
+          "pl": "Pedicure przed weekendem",
+          "en": "Pedicure before the weekend"
         },
         "imageId": "insta-pedicure",
         "link": "https://www.instagram.com/tealandtale.krakow/"
