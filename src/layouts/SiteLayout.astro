@@ -36,7 +36,6 @@ const { locale, title, description, path } = Astro.props;
 <script>
   import { gsap } from "gsap";
 
-  const root = document.documentElement;
   const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
   const sticky = document.querySelector("[data-sticky-cta]");
   const heroCopy = document.querySelector("[data-hero-copy]");
@@ -52,7 +51,6 @@ const { locale, title, description, path } = Astro.props;
       { opacity: 0, y: 24, rotate: -4 },
       { opacity: 1, y: 0, rotate: 0, delay: 0.25, duration: 1.2, ease: "power3.out" },
     );
-    gsap.to(floatingCard, { y: 12, repeat: -1, yoyo: true, duration: 3.4, ease: "sine.inOut" });
   }
 
   const observer = new IntersectionObserver(
@@ -88,19 +86,4 @@ const { locale, title, description, path } = Astro.props;
 
   updateSticky();
   window.addEventListener("scroll", updateSticky, { passive: true });
-
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.matchMedia("(pointer:fine)").matches) {
-    window.addEventListener(
-      "pointermove",
-      (event) => {
-        gsap.to(root, {
-          duration: 0.55,
-          ease: "power3.out",
-          "--pointer-x": `${event.clientX}px`,
-          "--pointer-y": `${event.clientY}px`,
-        });
-      },
-      { passive: true },
-    );
-  }
 </script>

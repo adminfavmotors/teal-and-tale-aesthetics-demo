@@ -25,7 +25,7 @@ const { locale } = Astro.props;
               <strong>{platform.rating}</strong>
             </div>
             <p class="trust-card__count">
-              {platform.reviewCount} · {t(platform.sourceLabel, locale)}
+              {platform.reviewCount} / {t(platform.sourceLabel, locale)}
             </p>
             <ul>
               {

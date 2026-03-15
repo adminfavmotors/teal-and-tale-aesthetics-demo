@@ -25,13 +25,15 @@ body {
   margin: 0;
   min-width: 320px;
   color: var(--text);
-  font-family: "Manrope", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   background:
     radial-gradient(circle at top left, rgba(153, 226, 226, 0.2), transparent 35%),
     radial-gradient(circle at bottom right, rgba(239, 228, 209, 0.45), transparent 30%),
     var(--background);
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body::before {
@@ -40,15 +42,16 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle 16rem at var(--pointer-x) var(--pointer-y), rgba(153, 226, 226, 0.22), transparent 72%),
-    radial-gradient(circle 12rem at calc(var(--pointer-x) - 9rem) calc(var(--pointer-y) + 9rem), rgba(189, 165, 122, 0.14), transparent 70%);
+    radial-gradient(circle 16rem at var(--pointer-x) var(--pointer-y), rgba(153, 226, 226, 0.14), transparent 72%),
+    radial-gradient(circle 12rem at calc(var(--pointer-x) - 9rem) calc(var(--pointer-y) + 9rem), rgba(189, 165, 122, 0.09), transparent 70%);
   z-index: -1;
 }
 
 img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 a {
@@ -60,8 +63,8 @@ h1,
 h2,
 h3,
 strong {
-  font-family: "Cormorant Garamond", serif;
-  letter-spacing: -0.03em;
+  font-family: "Fraunces", serif;
+  letter-spacing: -0.025em;
 }
 
 h1,
@@ -78,8 +81,8 @@ main {
 .ambient {
   position: fixed;
   border-radius: 999px;
-  filter: blur(60px);
-  opacity: 0.46;
+  filter: blur(48px);
+  opacity: 0.34;
   pointer-events: none;
   z-index: -1;
 }
@@ -106,7 +109,11 @@ main {
 }
 
 .section-shell {
-  padding: 2rem 0 0;
+  padding: clamp(2.75rem, 5vw, 4.5rem) 0 0;
+}
+
+.hero-section.section-shell {
+  padding-top: 1rem;
 }
 
 .section-heading {
@@ -142,7 +149,7 @@ main {
   border: 1px solid var(--stroke);
   background: var(--surface);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(22px);
+  backdrop-filter: blur(16px);
   border-radius: var(--radius-lg);
 }
 
@@ -255,18 +262,20 @@ main {
 .hero-grid {
   grid-template-columns: 1.08fr 0.92fr;
   align-items: center;
-  padding-top: 2rem;
+  min-height: calc(100svh - 7rem);
+  padding-top: 0.5rem;
 }
 
 .hero-copy {
   padding: 2rem;
   display: grid;
   gap: 1.25rem;
+  align-content: center;
 }
 
 .hero-copy h1 {
   font-size: clamp(3rem, 7vw, 5.4rem);
-  line-height: 0.92;
+  line-height: 0.96;
 }
 
 .hero-badges {
@@ -312,6 +321,7 @@ main {
   overflow: hidden;
   position: relative;
   box-shadow: var(--shadow);
+  background: rgba(255, 255, 255, 0.42);
 }
 
 .image-frame::after {
@@ -324,15 +334,22 @@ main {
 
 .image-frame--hero {
   border-radius: 2.2rem 8rem 2.2rem 2.2rem;
+  aspect-ratio: 4 / 5;
 }
 
 .image-frame--service,
 .image-frame--instagram {
   border-radius: 1.6rem;
+  aspect-ratio: 5 / 6;
 }
 
 .image-frame--experience {
   border-radius: 1.9rem;
+  aspect-ratio: 4 / 3;
+}
+
+.image-frame img {
+  transition: transform 320ms ease, opacity 320ms ease;
 }
 
 .hero-floating-card {
@@ -371,16 +388,23 @@ main {
 .service-grid {
   margin-top: 1.75rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
 }
 
 .service-card {
   overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100%;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  will-change: transform;
 }
 
 .service-card__body {
   display: grid;
   gap: 0.85rem;
   padding: 1.2rem;
+  align-content: start;
 }
 
 .service-card__meta,
@@ -395,6 +419,29 @@ main {
 .pillar-grid h3,
 .policy-list h2 {
   font-size: 2rem;
+}
+
+.service-card__body p,
+.pillar-grid p,
+.instagram-card span,
+.trust-card ul,
+.trust-card__count,
+.faq-item p {
+  color: var(--muted);
+}
+
+.service-card__footer {
+  margin-top: auto;
+}
+
+.service-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 28px 64px rgba(31, 53, 56, 0.16);
+  border-color: rgba(153, 226, 226, 0.38);
+}
+
+.service-card:hover .image-frame img {
+  transform: scale(1.045);
 }
 
 .experience-layout,
@@ -451,23 +498,22 @@ main {
   font-size: 3rem;
 }
 
-.trust-card__count {
-  color: var(--muted);
-}
-
 .trust-card ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
   gap: 0.55rem;
-  color: var(--muted);
 }
 
 .trust-card ul li::before {
-  content: "•";
-  margin-right: 0.45rem;
-  color: var(--gold);
+  content: "";
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.55rem;
+  border-radius: 999px;
+  background: rgba(189, 165, 122, 0.8);
 }
 
 .instagram-grid {
@@ -478,10 +524,15 @@ main {
 .instagram-card {
   display: grid;
   gap: 0.75rem;
+  transition: transform 220ms ease;
 }
 
-.instagram-card span {
-  color: var(--muted);
+.instagram-card:hover {
+  transform: translateY(-4px);
+}
+
+.instagram-card:hover .image-frame img {
+  transform: scale(1.035);
 }
 
 .centered-action {
@@ -560,6 +611,11 @@ main {
   border-radius: 1.2rem;
   background: rgba(255, 255, 255, 0.68);
   cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.channel-card:hover {
+  transform: translateY(-2px);
 }
 
 .channel-card input {
@@ -628,7 +684,6 @@ main {
 
 .faq-item p {
   margin-top: 0.8rem;
-  color: var(--muted);
 }
 
 .site-footer {
@@ -812,8 +867,8 @@ main {
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(24px) scale(0.985);
-  transition: opacity 700ms ease, transform 700ms ease;
+  transform: translateY(18px) scale(0.992);
+  transition: opacity 520ms ease, transform 520ms ease;
 }
 
 [data-reveal].is-visible {
@@ -823,8 +878,8 @@ main {
 
 .lazy-media {
   opacity: 0;
-  transform: scale(1.03);
-  transition: opacity 700ms ease, transform 700ms ease;
+  transform: scale(1.02);
+  transition: opacity 480ms ease, transform 480ms ease;
 }
 
 .lazy-media.is-visible {
@@ -853,6 +908,11 @@ main {
 
   .hero-visual {
     padding-left: 0;
+  }
+
+  .hero-grid {
+    min-height: auto;
+    padding-top: 0;
   }
 
   .hero-floating-card {
@@ -886,6 +946,13 @@ main {
 
   .hero-copy h1 {
     font-size: 2.85rem;
+  }
+
+  .image-frame--hero,
+  .image-frame--service,
+  .image-frame--instagram,
+  .image-frame--experience {
+    aspect-ratio: auto;
   }
 
   .admin-status-form {
