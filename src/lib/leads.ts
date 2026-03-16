@@ -85,7 +85,17 @@ const defaultLeadStore: LeadStore = {
 };
 
 function resolveLeadStoragePath() {
-  return process.env.LEADS_STORAGE_PATH ?? path.join(process.cwd(), "storage", "leads.json");
+  if (process.env.LEADS_STORAGE_PATH) {
+    return process.env.LEADS_STORAGE_PATH;
+  }
+
+  if (process.env.VERCEL) {
+    // Vercel functions do not provide a persistent writable project filesystem.
+    // For demo deploys, keep temporary lead storage in /tmp and prefer a real DB in production.
+    return path.join("/tmp", "teal-and-tale-leads.json");
+  }
+
+  return path.join(process.cwd(), "storage", "leads.json");
 }
 
 async function ensureLeadStorageFile() {

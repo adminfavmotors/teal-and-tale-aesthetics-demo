@@ -1,11 +1,16 @@
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 
+const isVercel = Boolean(process.env.VERCEL);
+
 export default defineConfig({
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: isVercel
+    ? vercel()
+    : node({
+        mode: "standalone",
+      }),
   server: {
     host: true,
   },
