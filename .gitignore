@@ -6,3 +6,4 @@ npm-debug.log*
 storage/leads.json
 .env
 .env.*
+.vercel
