@@ -150,8 +150,8 @@
       "en": "The signature rituals that create the strongest first impression at Teal & Tale."
     },
     "description": {
-      "pl": "Wybrane rytualy pokazane sa prosto: efekt, czas wizyty i inwestycja sa czytelne od pierwszego spojrzenia.",
-      "en": "The selection is presented clearly, with the finish, timing and investment visible at a glance."
+      "pl": "",
+      "en": ""
     }
   },
   "services": [
@@ -178,8 +178,8 @@
         "en": "The most requested first appointment before an event, a trip or simply as a reset for yourself."
       },
       "ctaLabel": {
-        "pl": "Umow manicure",
-        "en": "Book manicure"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-manicure"
     },
@@ -206,8 +206,8 @@
         "en": "Ideal when you prefer a lighter look and a shorter appointment."
       },
       "ctaLabel": {
-        "pl": "Wybierz usluge",
-        "en": "Choose service"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-manicure"
     },
@@ -262,8 +262,8 @@
         "en": "For guests who want lasting structure without a heavy look."
       },
       "ctaLabel": {
-        "pl": "Wybierz usluge",
-        "en": "Choose service"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-manicure"
     },
@@ -290,8 +290,8 @@
         "en": "Best for regular guests returning every three to four weeks."
       },
       "ctaLabel": {
-        "pl": "Umow uzupelnienie",
-        "en": "Book refill"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-manicure"
     },
@@ -346,8 +346,8 @@
         "en": "A strong choice for sandal season, travel or regular maintenance."
       },
       "ctaLabel": {
-        "pl": "Dodaj do wizyty",
-        "en": "Add to your visit"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-pedicure-hybrid"
     },
@@ -374,8 +374,8 @@
         "en": "For guests who prefer a clean result without gel colour."
       },
       "ctaLabel": {
-        "pl": "Wybierz usluge",
-        "en": "Choose service"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-pedicure"
     },
@@ -402,8 +402,8 @@
         "en": "An ideal pairing with manicure before a wedding, a holiday or an important weekend."
       },
       "ctaLabel": {
-        "pl": "Umow pedicure",
-        "en": "Book pedicure"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-pedicure"
     },
@@ -458,8 +458,8 @@
         "en": "Perfect when you want to refresh the shape without changing the colour."
       },
       "ctaLabel": {
-        "pl": "Umow strzyzenie",
-        "en": "Book haircut"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-hair"
     },
@@ -486,8 +486,8 @@
         "en": "For guests who want a fuller transformation or a polished seasonal refresh."
       },
       "ctaLabel": {
-        "pl": "Zarezerwuj konsultacje",
-        "en": "Book consultation"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-hair"
     },
@@ -514,8 +514,8 @@
         "en": "Ideal between full colour services when you want to maintain the finish."
       },
       "ctaLabel": {
-        "pl": "Wybierz usluge",
-        "en": "Choose service"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-hair"
     },
@@ -542,8 +542,8 @@
         "en": "Often booked after winter or before a more important event."
       },
       "ctaLabel": {
-        "pl": "Dodaj do wizyty",
-        "en": "Add to visit"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-hair"
     },
@@ -570,8 +570,8 @@
         "en": "A quick upgrade before a shoot, dinner or a week of minimal make-up."
       },
       "ctaLabel": {
-        "pl": "Umow brwi",
-        "en": "Book brows"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-brows"
     },
@@ -626,8 +626,8 @@
         "en": "Most often booked before holidays, weddings and photoshoots."
       },
       "ctaLabel": {
-        "pl": "Wybierz pakiet",
-        "en": "Choose duo"
+        "pl": "Zarezerwuj",
+        "en": "Reserve"
       },
       "mediaId": "service-brows"
     }
@@ -706,8 +706,8 @@
       "en": "Guests come back for the precision, the calm and the kind of result that looks expensive without ever feeling overdone."
     },
     "description": {
-      "pl": "Najwazniejsze profile i komentarze gosci w jednym miejscu, przed pierwsza rezerwacja.",
-      "en": "The most relevant review profiles and guest comments gathered in one place before a first booking."
+      "pl": "",
+      "en": ""
     },
     "platforms": [
       {
@@ -772,8 +772,8 @@
       "en": "A selection of nails, glossy hair, interior details and the Teal & Tale mood."
     },
     "description": {
-      "pl": "To bardziej editorialny moodboard niz techniczna galeria. Sekcja buduje pozadanie, pokazuje detal i zostawia przestrzen na pozniejsza podmiane na realne kadry z salonu.",
-      "en": "This section acts more like an editorial moodboard than a technical gallery. It builds desire through detail now and can later be replaced with real salon photography."
+      "pl": "",
+      "en": ""
     },
     "ctaLabel": {
       "pl": "Zobacz Instagram",
@@ -828,8 +828,8 @@
       "en": "Choose the service, date and time. We will confirm the rest in your preferred channel."
     },
     "description": {
-      "pl": "Formularz jest krotszy i bardziej konkretny: od razu widzisz dostepne dni, zajete terminy i wolne sloty godzinowe.",
-      "en": "The form is shorter and more specific: you see available days, blocked dates and open time slots at a glance."
+      "pl": "",
+      "en": ""
     },
     "helper": {
       "pl": "Najczesciej odpowiadamy w ciagu 2 godzin w godzinach pracy salonu.",
@@ -854,8 +854,8 @@
       "en": "Choose your preferred contact channel"
     },
     "submitLabel": {
-      "pl": "Zarezerwuj wizyte ->",
-      "en": "Reserve your visit ->"
+      "pl": "Zarezerwuj wizyt\u0119 \u2192",
+      "en": "Reserve your visit \u2192"
     },
     "submittingLabel": {
       "pl": "Zapisujemy zgloszenie...",
@@ -1250,7 +1250,7 @@
     },
     {
       "id": "service-pedicure",
-      "src": "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?auto=format&fit=crop&w=900&q=80",
+      "src": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80",
       "alt": {
         "pl": "Pedicure spa w spokojnym, luksusowym otoczeniu",
         "en": "A spa pedicure in a calm, premium setting"

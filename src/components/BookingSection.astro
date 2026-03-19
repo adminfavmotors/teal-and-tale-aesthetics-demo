@@ -54,7 +54,7 @@ const serviceGroups = categoryTabs
   }))
   .filter((group) => group.services.length > 0);
 
-const submitLabel = locale === "pl" ? "Zarezerwuj wizyte →" : "Reserve your visit →";
+const submitLabel = locale === "pl" ? "Zarezerwuj wizytę →" : "Reserve your visit →";
 ---
 
 <section class="section-shell section-shell--alt" id="booking">
@@ -62,9 +62,13 @@ const submitLabel = locale === "pl" ? "Zarezerwuj wizyte →" : "Reserve your vi
     <div class="booking-copy">
       <p class="section-label" data-reveal>{t(content.booking.eyebrow, locale)}</p>
       <h2 data-reveal style="--reveal-delay:0.1s;">{t(content.booking.title, locale)}</h2>
-      <p class="section-copy" data-reveal style="--reveal-delay:0.2s;">
-        {t(content.booking.description, locale)}
-      </p>
+      {
+        t(content.booking.description, locale) && (
+          <p class="section-copy" data-reveal style="--reveal-delay:0.2s;">
+            {t(content.booking.description, locale)}
+          </p>
+        )
+      }
 
       <div class="booking-info-list">
         {
