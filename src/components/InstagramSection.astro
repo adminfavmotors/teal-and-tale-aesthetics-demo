@@ -6,48 +6,55 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const instagramIcon =
+  '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>';
 ---
 
-<section class="section-shell" id="instagram">
+<section class="section-shell section-shell--base" id="instagram">
   <div class="container-shell">
-    <div class="section-heading" data-reveal>
-      <p class="section-eyebrow">{t(content.instagram.eyebrow, locale)}</p>
-      <h2>{t(content.instagram.title, locale)}</h2>
-      <p class="section-lead">{t(content.instagram.description, locale)}</p>
+    <div class="instagram-header" data-reveal>
+      <div>
+        <p class="section-label">{t(content.instagram.eyebrow, locale)}</p>
+        <h2>@tealandtale.krakow</h2>
+      </div>
+
+      <a class="button button--ghost" href={content.brand.contact.instagram} target="_blank" rel="noreferrer">
+        {t(content.instagram.ctaLabel, locale)}
+      </a>
     </div>
 
     <div class="instagram-grid">
       {
-        content.instagram.posts.map((post) => {
+        content.instagram.posts.map((post, index) => {
           const media = getMediaById(post.imageId);
 
           return (
-            <a class="instagram-card" href={post.link} target="_blank" rel="noreferrer" data-reveal>
+            <a
+              class="instagram-item"
+              href={post.link}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t(post.title, locale)}
+              data-reveal
+              style={`--reveal-delay:${index * 0.1}s;`}
+            >
               {
                 media && (
-                  <figure class="image-frame image-frame--instagram">
-                    <img
-                      src={media.src}
-                      alt={t(media.alt, locale)}
-                      width={media.width}
-                      height={media.height}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </figure>
+                  <img
+                    src={media.src}
+                    alt={t(media.alt, locale)}
+                    width={media.width}
+                    height={media.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 )
               }
-              <span>{t(post.title, locale)}</span>
+              <span class="instagram-item__overlay" set:html={instagramIcon}></span>
             </a>
           );
         })
       }
-    </div>
-
-    <div class="centered-action" data-reveal>
-      <a class="pill-button" href={content.brand.contact.instagram} target="_blank" rel="noreferrer">
-        {t(content.instagram.ctaLabel, locale)}
-      </a>
     </div>
   </div>
 </section>

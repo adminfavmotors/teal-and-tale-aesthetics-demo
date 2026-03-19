@@ -10,13 +10,9 @@ const otherLocale = locale === "pl" ? "en" : "pl";
 ---
 
 <header class="site-header">
-  <div class="container-shell header-bar">
-    <a class="brand-mark header-brand" href={`/${locale}/`}>
-      <span class="brand-mark__dot"></span>
-      <span>
-        <strong>{content.brand.name}</strong>
-        <small>{t(content.brand.tagline, locale)}</small>
-      </span>
+  <div class="container-shell site-header__inner">
+    <a class="site-logo" href={`/${locale}/`}>
+      Teal & Tale
     </a>
 
     <nav class="site-nav" aria-label="Primary">
@@ -25,15 +21,60 @@ const otherLocale = locale === "pl" ? "en" : "pl";
           <a href={`#${item.id}`}>{t(item.label, locale)}</a>
         ))
       }
+      <a href="#faq">{t(content.faq.eyebrow, locale)}</a>
     </nav>
 
-    <div class="header-actions">
-      <a class="language-switch" href={`/${otherLocale}/`}>
-        {otherLocale.toUpperCase()}
-      </a>
-      <a class="pill-button pill-button--compact" href="#booking">
+    <div class="site-header__actions">
+      <div class="language-switch" aria-label="Language switch">
+        <a aria-current={locale === "pl" ? "true" : undefined} href="/pl/">PL</a>
+        <span>/</span>
+        <a aria-current={locale === "en" ? "true" : undefined} href="/en/">EN</a>
+      </div>
+
+      <a class="button button--primary site-header__cta" href="#booking">
         {t(content.hero.primaryCta, locale)}
       </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-label={locale === "pl" ? "Otworz menu" : "Open menu"}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" data-mobile-panel>
+    <div class="container-shell mobile-menu__inner">
+      <nav class="mobile-nav" aria-label="Mobile">
+        {
+          content.navigation.map((item) => (
+            <a href={`#${item.id}`} data-mobile-link>{t(item.label, locale)}</a>
+          ))
+        }
+        <a href="#faq" data-mobile-link>{t(content.faq.eyebrow, locale)}</a>
+      </nav>
+
+      <div class="mobile-menu__footer">
+        <div class="language-switch" aria-label="Language switch">
+          <a aria-current={locale === "pl" ? "true" : undefined} href="/pl/">PL</a>
+          <span>/</span>
+          <a aria-current={locale === "en" ? "true" : undefined} href="/en/">EN</a>
+        </div>
+
+        <a class="button button--primary" href="#booking" data-mobile-link>
+          {t(content.hero.primaryCta, locale)}
+        </a>
+
+        <a class="mobile-menu__alt-locale" href={`/${otherLocale}/`} data-mobile-link>
+          {locale === "pl" ? "View in English" : "Przelacz na polski"}
+        </a>
+      </div>
     </div>
   </div>
 </header>

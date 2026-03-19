@@ -7,37 +7,47 @@ interface Props {
 
 const { locale } = Astro.props;
 const images = content.experience.mediaIds.map((id) => getMediaById(id)).filter(Boolean);
+const featureIcons = [
+  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 4.6L18 9.3l-4.3 1.6L12 15.5l-1.7-4.6L6 9.3l4.3-1.7L12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 4 8l8 4 8-4-8-4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m4 12 8 4 8-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m4 16 8 4 8-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10h9v4a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4v-4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11h2a2 2 0 1 1 0 4h-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 4c0 1-1 1.5-1 2.5S8 8 8 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+];
 ---
 
-<section class="section-shell" id="experience">
-  <div class="container-shell experience-layout">
-    <div class="experience-copy" data-reveal>
-      <p class="section-eyebrow">{t(content.experience.eyebrow, locale)}</p>
-      <h2>{t(content.experience.title, locale)}</h2>
-      <p class="section-lead">{t(content.experience.description, locale)}</p>
+<section class="section-shell section-shell--alt" id="experience">
+  <div class="container-shell experience-grid">
+    <div class="experience-copy">
+      <p class="section-label" data-reveal>{t(content.experience.eyebrow, locale)}</p>
+      <h2 data-reveal style="--reveal-delay:0.1s;">{t(content.experience.title, locale)}</h2>
+      <p class="section-copy" data-reveal style="--reveal-delay:0.2s;">
+        {t(content.experience.description, locale)}
+      </p>
 
-      <div class="pillar-grid">
+      <div class="experience-features">
         {
-          content.experience.pillars.map((pillar) => (
-            <article class="glass-card">
-              <h3>{t(pillar.title, locale)}</h3>
-              <p>{t(pillar.copy, locale)}</p>
+          content.experience.pillars.map((pillar, index) => (
+            <article class="experience-feature" data-reveal style={`--reveal-delay:${index * 0.1}s;`}>
+              <span class="feature-icon" set:html={featureIcons[index]}></span>
+              <div>
+                <h3>{t(pillar.title, locale)}</h3>
+                <p>{t(pillar.copy, locale)}</p>
+              </div>
             </article>
           ))
         }
       </div>
 
-      <ul class="highlight-list">
+      <ul class="experience-highlights" data-reveal style="--reveal-delay:0.3s;">
         {
           content.experience.highlights.map((item) => <li>{t(item, locale)}</li>)
         }
       </ul>
     </div>
 
-    <div class="experience-gallery">
+    <div class="experience-media">
       {
-        images.map((image) => (
-          <figure class="image-frame image-frame--experience" data-reveal>
+        images.map((image, index) => (
+          <figure data-reveal style={`--reveal-delay:${index * 0.1}s;`}>
             <img
               src={image!.src}
               alt={t(image!.alt, locale)}

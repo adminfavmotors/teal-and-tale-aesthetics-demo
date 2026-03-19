@@ -1,5 +1,5 @@
 ---
-import { content, formatPrice, getMediaById, type Locale, t } from "../lib/content";
+import { content, getMediaById, type Locale, t } from "../lib/content";
 
 interface Props {
   locale: Locale;
@@ -7,64 +7,62 @@ interface Props {
 
 const { locale } = Astro.props;
 const heroMedia = getMediaById(content.hero.mediaId);
-const featuredService = content.services.find((service) => service.id === "manicure-hybrydowy") ?? content.services[0];
+const heroBadge = "Premium beauty · Krakow, Zablocie";
+const metricLabels = {
+  pl: ["ocena gosci", "sredni czas odpowiedzi", "dni przyjec"],
+  en: ["guest rating", "average reply time", "open days"],
+};
+
+function splitHeroTitle(title: string) {
+  const commaIndex = title.indexOf(",");
+
+  if (commaIndex === -1) {
+    return title;
+  }
+
+  return `${title.slice(0, commaIndex + 1)}<br />${title.slice(commaIndex + 2)}`;
+}
 ---
 
-<section class="hero-section section-shell" id="top">
+<section class="hero-section" id="top">
   <div class="container-shell hero-grid">
-    <div class="hero-copy glass-card glass-card--strong" data-hero-copy data-reveal>
-      <p class="section-eyebrow">{t(content.hero.eyebrow, locale)}</p>
-      <h1>{t(content.hero.title, locale)}</h1>
-      <p class="section-lead">{t(content.hero.description, locale)}</p>
+    <div class="hero-copy">
+      <span class="eyebrow-pill" data-reveal>{heroBadge}</span>
+      <h1 data-reveal style="--reveal-delay:0.1s;" set:html={splitHeroTitle(t(content.hero.title, locale))}></h1>
+      <p class="hero-description" data-reveal style="--reveal-delay:0.2s;">
+        {t(content.hero.description, locale)}
+      </p>
 
-      <div class="hero-actions">
-        <a class="pill-button" href="#booking">{t(content.hero.primaryCta, locale)}</a>
-        <a class="ghost-link" href="#services">{t(content.hero.secondaryCta, locale)}</a>
+      <div class="hero-actions" data-reveal style="--reveal-delay:0.3s;">
+        <a class="button button--primary" href="#booking">{t(content.hero.primaryCta, locale)}</a>
+        <a class="button button--ghost" href="#services">{t(content.hero.secondaryCta, locale)}</a>
       </div>
 
-      <ul class="hero-badges">
+      <div class="hero-stats" data-reveal style="--reveal-delay:0.4s;">
         {
-          content.hero.badges.map((badge) => <li>{t(badge, locale)}</li>)
-        }
-      </ul>
-
-      <div class="hero-metrics">
-        {
-          content.hero.metrics.map((metric) => (
-            <article>
-              <strong>{metric.value}</strong>
-              <span>{t(metric.label, locale)}</span>
+          content.hero.metrics.map((metric, index) => (
+            <article class="hero-stat">
+              <p class="hero-stat__value">{metric.value.replace(" h", "h")}</p>
+              <p class="hero-stat__label">{metricLabels[locale][index]}</p>
             </article>
           ))
         }
       </div>
     </div>
 
-    <div class="hero-visual" data-reveal>
+    <div class="hero-media" data-reveal style="--reveal-delay:0.2s;">
       {
         heroMedia && (
-          <figure class="image-frame image-frame--hero">
-            <img
-              src={heroMedia.src}
-              alt={t(heroMedia.alt, locale)}
-              width={heroMedia.width}
-              height={heroMedia.height}
-              loading="eager"
-              decoding="async"
-            />
-          </figure>
+          <img
+            src={heroMedia.src}
+            alt={t(heroMedia.alt, locale)}
+            width={heroMedia.width}
+            height={heroMedia.height}
+            loading="eager"
+            decoding="async"
+          />
         )
       }
-
-      <aside class="hero-floating-card glass-card" data-hero-float>
-        <span class="mini-label">{t(featuredService.category, locale)}</span>
-        <strong>{t(featuredService.name, locale)}</strong>
-        <p>{t(featuredService.experienceNote, locale)}</p>
-        <div class="floating-meta">
-          <span>{formatPrice(featuredService.price, featuredService.currency, locale)}</span>
-          <span>{featuredService.durationMin} min</span>
-        </div>
-      </aside>
     </div>
   </div>
 </section>

@@ -6,29 +6,61 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const contactIcons = {
+  pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.3 6-11a6 6 0 1 0-12 0c0 5.7 6 11 6 11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2 1.5a15 15 0 0 0 4.5 4.5L15 13l5 2v4a2 2 0 0 1-2 2h-1C10.4 21 3 13.6 3 4V3a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>',
+};
 ---
 
 <footer class="site-footer">
-  <div class="container-shell footer-grid">
-    <div>
-      <p class="section-eyebrow">{content.brand.name}</p>
-      <p>{t(content.footer.copy, locale)}</p>
-    </div>
-
-    <div>
-      <strong>{t(content.brand.addressLabel, locale)}</strong>
-      <p>{t(content.brand.addressLine, locale)}</p>
-      <p>{content.brand.contact.phone}</p>
-      <p>{content.brand.contact.bookingEmail}</p>
-    </div>
-
-    <div>
-      <strong>{locale === "pl" ? "Na skroty" : "Quick links"}</strong>
-      <div class="footer-links">
-        <a href="#booking">{t(content.footer.cta, locale)}</a>
-        <a href={`/${locale}/privacy-policy/`}>{t(content.legal.privacyLinkLabel, locale)}</a>
-        <a href={content.brand.contact.instagram} target="_blank" rel="noreferrer">Instagram</a>
+  <div class="container-shell">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-logo">Teal & Tale</p>
+        <p class="footer-copy">{t(content.footer.copy, locale)}</p>
       </div>
+
+      <div>
+        <p class="footer-heading">{locale === "pl" ? "Nawigacja" : "Navigation"}</p>
+        <div class="footer-links">
+          {
+            content.navigation.map((item) => (
+              <a href={`#${item.id}`}>{t(item.label, locale)}</a>
+            ))
+          }
+          <a href="#faq">{t(content.faq.eyebrow, locale)}</a>
+          <a href={`/${locale}/privacy-policy/`}>{t(content.legal.privacyLinkLabel, locale)}</a>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-heading">{locale === "pl" ? "Kontakt" : "Contact"}</p>
+        <div class="footer-contact">
+          <div class="footer-contact__row">
+            <span class="footer-contact__icon" set:html={contactIcons.pin}></span>
+            <span>{t(content.brand.addressLine, locale)}</span>
+          </div>
+          <div class="footer-contact__row">
+            <span class="footer-contact__icon" set:html={contactIcons.phone}></span>
+            <a href={`tel:${content.brand.contact.phone.replace(/\s+/g, "")}`}>{content.brand.contact.phone}</a>
+          </div>
+          <div class="footer-contact__row">
+            <span class="footer-contact__icon" set:html={contactIcons.mail}></span>
+            <a href={`mailto:${content.brand.contact.bookingEmail}`}>{content.brand.contact.bookingEmail}</a>
+          </div>
+          <div class="footer-contact__row">
+            <span class="footer-contact__icon" set:html={contactIcons.instagram}></span>
+            <a href={content.brand.contact.instagram} target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; {new Date().getFullYear()} {content.brand.name}</span>
+      <a href={`/${locale}/privacy-policy/`}>{t(content.legal.privacyLinkLabel, locale)}</a>
     </div>
   </div>
 </footer>

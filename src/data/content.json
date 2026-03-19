@@ -150,8 +150,8 @@
       "en": "The signature rituals that create the strongest first impression at Teal & Tale."
     },
     "description": {
-      "pl": "Oferta jest pokazana jasno i komercyjnie: wiesz, jaki efekt rezerwujesz, ile trwa wizyta i jaka jest inwestycja, zanim przejdziesz do formularza.",
-      "en": "The offer is structured for quick decision-making: you see the result, the appointment length and the investment before reaching the booking form."
+      "pl": "Wybrane rytualy pokazane sa prosto: efekt, czas wizyty i inwestycja sa czytelne od pierwszego spojrzenia.",
+      "en": "The selection is presented clearly, with the finish, timing and investment visible at a glance."
     }
   },
   "services": [
@@ -349,7 +349,7 @@
         "pl": "Dodaj do wizyty",
         "en": "Add to your visit"
       },
-      "mediaId": "service-pedicure"
+      "mediaId": "service-pedicure-hybrid"
     },
     {
       "id": "pedicure-klasyczny",
@@ -706,8 +706,8 @@
       "en": "Guests come back for the precision, the calm and the kind of result that looks expensive without ever feeling overdone."
     },
     "description": {
-      "pl": "Sekcja opinii porzadkuje najwazniejsze zrodla zaufania przed pierwsza rezerwacja. Pokazuje, gdzie sprawdzic ocene salonu i czego najczesciej dotycza pozytywne komentarze.",
-      "en": "This section organises the key trust signals before a first booking. It shows where guests check the salon rating and what the strongest reviews tend to mention."
+      "pl": "Najwazniejsze profile i komentarze gosci w jednym miejscu, przed pierwsza rezerwacja.",
+      "en": "The most relevant review profiles and guest comments gathered in one place before a first booking."
     },
     "platforms": [
       {
@@ -768,8 +768,8 @@
       "en": "Instagram edit"
     },
     "title": {
-      "pl": "Feed, ktory pokazuje klimat marki, zanim pokaze pelne portfolio uslug.",
-      "en": "A feed that sells the mood of the brand before it even shows the full service portfolio."
+      "pl": "Kadry z manicure, glossy hair, detalu i atmosfery Teal & Tale.",
+      "en": "A selection of nails, glossy hair, interior details and the Teal & Tale mood."
     },
     "description": {
       "pl": "To bardziej editorialny moodboard niz techniczna galeria. Sekcja buduje pozadanie, pokazuje detal i zostawia przestrzen na pozniejsza podmiane na realne kadry z salonu.",
@@ -854,8 +854,8 @@
       "en": "Choose your preferred contact channel"
     },
     "submitLabel": {
-      "pl": "Przygotuj wiadomosc",
-      "en": "Prepare message"
+      "pl": "Zarezerwuj wizyte ->",
+      "en": "Reserve your visit ->"
     },
     "submittingLabel": {
       "pl": "Zapisujemy zgloszenie...",
@@ -1233,6 +1233,19 @@
       "height": 1100,
       "priority": false,
       "mood": "hair",
+      "overlay": "teal"
+    },
+    {
+      "id": "service-pedicure-hybrid",
+      "src": "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=80",
+      "alt": {
+        "pl": "Pedicure hybrydowy w jasnym, czystym ujeciu beauty",
+        "en": "A gel pedicure in a clean beauty close-up"
+      },
+      "width": 900,
+      "height": 1100,
+      "priority": false,
+      "mood": "pedicure",
       "overlay": "teal"
     },
     {

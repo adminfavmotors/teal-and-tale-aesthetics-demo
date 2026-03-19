@@ -8,22 +8,54 @@ interface Props {
 const { locale } = Astro.props;
 ---
 
-<section class="section-shell" id="faq">
+<section class="section-shell section-shell--base" id="faq">
   <div class="container-shell">
-    <div class="section-heading" data-reveal>
-      <p class="section-eyebrow">{t(content.faq.eyebrow, locale)}</p>
+    <div class="section-heading section-heading--center" data-reveal>
+      <p class="section-label">{t(content.faq.eyebrow, locale)}</p>
       <h2>{t(content.faq.title, locale)}</h2>
     </div>
 
     <div class="faq-list">
       {
-        content.faq.items.map((item) => (
-          <details class="glass-card faq-item" data-reveal>
-            <summary>{t(item.question, locale)}</summary>
-            <p>{t(item.answer, locale)}</p>
-          </details>
+        content.faq.items.map((item, index) => (
+          <article class="faq-item" data-reveal style={`--reveal-delay:${index * 0.08}s;`}>
+            <button class="faq-item__trigger" type="button" data-faq-trigger aria-expanded="false">
+              <span>{t(item.question, locale)}</span>
+              <span class="faq-item__icon">+</span>
+            </button>
+            <div class="faq-item__panel" data-faq-panel>
+              <p>{t(item.answer, locale)}</p>
+            </div>
+          </article>
         ))
       }
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll("[data-faq-trigger]").forEach((trigger) => {
+    if (!(trigger instanceof HTMLButtonElement)) return;
+
+    trigger.addEventListener("click", () => {
+      const item = trigger.closest(".faq-item");
+      const panel = item?.querySelector("[data-faq-panel]");
+      const icon = trigger.querySelector(".faq-item__icon");
+      const isOpen = trigger.getAttribute("aria-expanded") === "true";
+
+      trigger.setAttribute("aria-expanded", isOpen ? "false" : "true");
+
+      if (item instanceof HTMLElement) {
+        item.classList.toggle("is-open", !isOpen);
+      }
+
+      if (panel instanceof HTMLElement) {
+        panel.style.maxHeight = isOpen ? "0px" : `${panel.scrollHeight}px`;
+      }
+
+      if (icon instanceof HTMLElement) {
+        icon.textContent = isOpen ? "+" : "−";
+      }
+    });
+  });
+</script>

@@ -9,24 +9,23 @@ const { locale } = Astro.props;
 const services = content.services.filter((service) => service.featured);
 ---
 
-<section class="section-shell" id="services">
+<section class="section-shell section-shell--base" id="services">
   <div class="container-shell">
-    <div class="section-heading" data-reveal>
-      <p class="section-eyebrow">{t(content.servicesIntro.eyebrow, locale)}</p>
+    <div class="section-heading section-heading--center" data-reveal>
+      <p class="section-label">Najczesciej wybierane</p>
       <h2>{t(content.servicesIntro.title, locale)}</h2>
-      <p class="section-lead">{t(content.servicesIntro.description, locale)}</p>
     </div>
 
-    <div class="service-grid">
+    <div class="services-grid">
       {
-        services.map((service) => {
+        services.map((service, index) => {
           const media = getMediaById(service.mediaId);
 
           return (
-            <article class="service-card glass-card" data-reveal>
+            <article class="service-card" data-reveal style={`--reveal-delay:${index * 0.1}s;`}>
               {
                 media && (
-                  <figure class="image-frame image-frame--service">
+                  <figure class="service-card__media">
                     <img
                       src={media.src}
                       alt={t(media.alt, locale)}
@@ -39,17 +38,20 @@ const services = content.services.filter((service) => service.featured);
                 )
               }
 
-              <div class="service-card__body">
-                <div class="service-card__meta">
-                  <span>{t(service.category, locale)}</span>
-                  <span>{formatDuration(service.durationMin)}</span>
-                </div>
-                <h3>{t(service.name, locale)}</h3>
-                <p>{t(service.shortDescription, locale)}</p>
-                <div class="service-card__footer">
-                  <strong>{formatPrice(service.price, service.currency, locale)}</strong>
-                  <a href={`/${locale}/?service=${service.id}#booking`}>{t(service.ctaLabel, locale)}</a>
-                </div>
+              <div class="service-card__meta">
+                <span class="category-badge">{t(service.category, locale)}</span>
+                <span>·</span>
+                <span>{formatDuration(service.durationMin)}</span>
+              </div>
+
+              <h3>{t(service.name, locale)}</h3>
+              <p class="service-card__description">{t(service.shortDescription, locale)}</p>
+
+              <div class="service-card__footer">
+                <p class="price">{formatPrice(service.price, service.currency, locale)}</p>
+                <a class="button button--primary button--small" href={`/${locale}/?service=${service.id}#booking`}>
+                  {locale === "pl" ? "Zarezerwuj" : "Reserve"}
+                </a>
               </div>
             </article>
           );

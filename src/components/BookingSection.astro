@@ -1,51 +1,90 @@
 ---
-import { content, type Locale, t } from "../lib/content";
+import { content, formatDuration, formatPrice, type Locale, t } from "../lib/content";
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
+
+const infoItems = {
+  pl: ["12 dni w kalendarzu", "widzisz zajete sloty", "potwierdzenie przez WA/TG/email"],
+  en: [
+    "12 days visible in the calendar",
+    "busy slots are visible at a glance",
+    "confirmation via WA/TG/email",
+  ],
+};
+
+const infoIcons = [
+  '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v4M16 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 3v-3H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+];
+
 const channelIcons = {
-  whatsapp: "WA",
-  telegram: "TG",
-  email: "@",
+  whatsapp:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.4A8.4 8.4 0 0 1 7.4 18.8L4 20l1.2-3.4A8.4 8.4 0 1 1 20 11.4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 8.8c.1-.4.3-.5.5-.5h.8c.2 0 .4 0 .5.4l.6 1.6c.1.2 0 .4-.1.6l-.4.5c.4.8 1 1.4 1.8 1.8l.5-.4c.2-.1.4-.2.6-.1l1.6.6c.4.1.4.3.4.5v.8c0 .2-.1.4-.5.5-.5.2-1 .3-1.5.2-2.8-.7-5-2.9-5.7-5.7-.1-.5 0-1 .2-1.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  telegram:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 4-3 15-5-4-3 3 .4-4.3L4 11 21 4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="m10.4 13.7 7.2-7.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  email:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 } as const;
-const groupedServices = Array.from(
-  content.services.reduce((map, service) => {
-    const category = t(service.category, locale);
-    const services = map.get(category) ?? [];
-    services.push(service);
-    map.set(category, services);
-    return map;
-  }, new Map<string, typeof content.services>()),
-);
+
+const categoryTabs = [
+  { key: "nails", label: { pl: "Paznokcie", en: "Nails" } },
+  { key: "pedicure", label: { pl: "Pedicure", en: "Pedicure" } },
+  { key: "hair", label: { pl: "Wlosy", en: "Hair" } },
+  { key: "brows", label: { pl: "Brwi & Rzesy", en: "Brows & Lashes" } },
+];
+
+function getCategoryKey(category: string) {
+  const normalized = category.toLowerCase();
+
+  if (normalized.includes("paz")) return "nails";
+  if (normalized.includes("pedicure")) return "pedicure";
+  if (normalized.includes("wlos")) return "hair";
+  return "brows";
+}
+
+const serviceGroups = categoryTabs
+  .map((tab) => ({
+    ...tab,
+    services: content.services.filter((service) => getCategoryKey(service.category.pl) === tab.key),
+  }))
+  .filter((group) => group.services.length > 0);
+
+const submitLabel = locale === "pl" ? "Zarezerwuj wizyte →" : "Reserve your visit →";
 ---
 
-<section class="section-shell" id="booking">
-  <div class="container-shell booking-layout">
-    <div class="booking-copy" data-reveal>
-      <p class="section-eyebrow">{t(content.booking.eyebrow, locale)}</p>
-      <h2>{t(content.booking.title, locale)}</h2>
-      <p class="section-lead">{t(content.booking.description, locale)}</p>
-      <p class="booking-helper">{t(content.booking.helper, locale)}</p>
+<section class="section-shell section-shell--alt" id="booking">
+  <div class="container-shell booking-grid">
+    <div class="booking-copy">
+      <p class="section-label" data-reveal>{t(content.booking.eyebrow, locale)}</p>
+      <h2 data-reveal style="--reveal-delay:0.1s;">{t(content.booking.title, locale)}</h2>
+      <p class="section-copy" data-reveal style="--reveal-delay:0.2s;">
+        {t(content.booking.description, locale)}
+      </p>
 
-      <div class="booking-statuses glass-card">
+      <div class="booking-info-list">
         {
-          content.booking.assurances.map((item) => (
-            <span>{t(item, locale)}</span>
+          infoItems[locale].map((item, index) => (
+            <div class="booking-info-row" data-reveal style={`--reveal-delay:${index * 0.1}s;`}>
+              <span class="booking-info-row__icon" set:html={infoIcons[index]}></span>
+              <span>{item}</span>
+            </div>
           ))
         }
       </div>
     </div>
 
-    <div class="glass-card booking-form-card" data-reveal>
+    <div class="booking-form-card" data-reveal>
       <form
         class="booking-form"
         data-booking-form
         data-locale={locale}
         data-api-endpoint="/api/leads"
-        data-submit-label={t(content.booking.submitLabel, locale)}
+        data-submit-label={submitLabel}
         data-submitting-label={t(content.booking.submittingLabel, locale)}
         data-success-message={t(content.booking.successMessage, locale)}
         data-error-message={t(content.booking.errorMessage, locale)}
@@ -56,97 +95,138 @@ const groupedServices = Array.from(
         data-email={content.brand.contact.bookingEmail}
         data-calendar={JSON.stringify(content.booking.calendar)}
       >
-        <label>
-          <span>{t(content.booking.fieldLabels.service, locale)}</span>
-          <select name="service" required>
+        <div class="booking-form__group">
+          <span class="field-label">{t(content.booking.fieldLabels.service, locale)}</span>
+
+          <div class="service-tabs" role="tablist" aria-label={t(content.booking.fieldLabels.service, locale)}>
             {
-              groupedServices.map(([category, services]) => (
-                <optgroup label={category}>
-                  {services.map((service) => (
-                    <option value={service.id}>{t(service.name, locale)}</option>
-                  ))}
-                </optgroup>
+              serviceGroups.map((group, index) => (
+                <button
+                  class:list={["service-tab", index === 0 && "is-active"]}
+                  type="button"
+                  data-service-tab={group.key}
+                  aria-selected={index === 0 ? "true" : "false"}
+                >
+                  {group.label[locale]}
+                </button>
               ))
             }
-          </select>
-        </label>
+          </div>
 
-        <div class="form-grid form-grid--contact">
-          <label>
-            <span>{t(content.booking.fieldLabels.name, locale)}</span>
+          <div class="service-groups">
+            {
+              serviceGroups.map((group, groupIndex) => (
+                <div
+                  class:list={["service-group", groupIndex === 0 && "is-active"]}
+                  data-service-group={group.key}
+                >
+                  {
+                    group.services.map((service, serviceIndex) => (
+                      <label class:list={["service-option", groupIndex === 0 && serviceIndex === 0 && "is-selected"]}>
+                        <input
+                          type="radio"
+                          name="service"
+                          value={service.id}
+                          data-service-option-input={group.key}
+                          data-service-name={t(service.name, locale)}
+                          checked={groupIndex === 0 && serviceIndex === 0}
+                          required
+                        />
+                        <span class="service-option__row">
+                          <span class="service-option__title">{t(service.name, locale)}</span>
+                          <span class="price">{formatPrice(service.price, service.currency, locale)}</span>
+                        </span>
+                        <span class="service-option__meta">{formatDuration(service.durationMin)}</span>
+                      </label>
+                    ))
+                  }
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="booking-form__group booking-form__fields">
+          <label class="field">
+            <span class="field-label">{t(content.booking.fieldLabels.name, locale)}</span>
             <input name="name" type="text" autocomplete="name" required />
           </label>
-          <label>
-            <span>{t(content.booking.fieldLabels.email, locale)}</span>
+
+          <label class="field">
+            <span class="field-label">{t(content.booking.fieldLabels.email, locale)}</span>
             <input name="email" type="email" autocomplete="email" required />
           </label>
-          <label>
-            <span>{t(content.booking.fieldLabels.phone, locale)}</span>
+
+          <label class="field">
+            <span class="field-label">{t(content.booking.fieldLabels.phone, locale)}</span>
             <input name="phone" type="tel" autocomplete="tel" required />
           </label>
         </div>
 
-        <div class="scheduler-grid">
-          <section class="scheduler-panel">
-            <div class="scheduler-panel__header">
-              <strong>{t(content.booking.calendar.labels.selectDate, locale)}</strong>
-              <span data-date-summary>
-                {t(content.booking.calendar.labels.selectedDate, locale)}
-              </span>
+        <div class="booking-form__group booking-scheduler">
+          <section class="scheduler-card">
+            <div class="scheduler-card__header">
+              <span class="field-label">{t(content.booking.calendar.labels.selectDate, locale)}</span>
+              <span data-date-summary>{t(content.booking.calendar.labels.selectedDate, locale)}</span>
             </div>
             <div class="calendar-grid" data-date-grid></div>
             <input name="date" type="hidden" required data-date-input />
           </section>
 
-          <section class="scheduler-panel">
-            <div class="scheduler-panel__header">
-              <strong>{t(content.booking.calendar.labels.selectTime, locale)}</strong>
-              <span data-time-summary>
-                {t(content.booking.calendar.labels.selectedTime, locale)}
-              </span>
+          <section class="scheduler-card">
+            <div class="scheduler-card__header">
+              <span class="field-label">{t(content.booking.calendar.labels.selectTime, locale)}</span>
+              <span data-time-summary>{t(content.booking.calendar.labels.selectedTime, locale)}</span>
             </div>
             <div class="timeslot-grid" data-time-grid></div>
             <input name="time" type="hidden" required data-time-input />
           </section>
         </div>
 
-        <fieldset class="channel-grid">
-          <legend>{t(content.booking.channelLabel, locale)}</legend>
-          {
-            content.booking.channels.map((channel, index) => (
-              <label class="channel-card">
-                <input type="radio" name="channel" value={channel.id} checked={index === 0} />
-                <span class="channel-card__icon" aria-hidden="true">{channelIcons[channel.id]}</span>
-                <strong>{t(channel.label, locale)}</strong>
-              </label>
-            ))
-          }
-        </fieldset>
+        <div class="booking-form__group">
+          <span class="field-label">{t(content.booking.channelLabel, locale)}</span>
+          <fieldset class="channel-grid">
+            {
+              content.booking.channels.map((channel, index) => (
+                <label class:list={["channel-card", index === 0 && "is-selected"]}>
+                  <input type="radio" name="channel" value={channel.id} checked={index === 0} data-channel-input />
+                  <span class="channel-card__icon" set:html={channelIcons[channel.id]}></span>
+                  <span class="channel-card__label">{channel.id === "whatsapp" ? "WA" : channel.id === "telegram" ? "TG" : "Email"}</span>
+                </label>
+              ))
+            }
+          </fieldset>
+        </div>
 
-        <label>
-          <span>{t(content.booking.fieldLabels.notes, locale)}</span>
-          <textarea
-            name="notes"
-            rows="4"
-            placeholder={t(content.booking.notesPlaceholder, locale)}
-          ></textarea>
-        </label>
+        <div class="booking-form__group">
+          <label class="field field--full">
+            <span class="field-label">{t(content.booking.fieldLabels.notes, locale)}</span>
+            <textarea
+              name="notes"
+              rows="4"
+              placeholder={t(content.booking.notesPlaceholder, locale)}
+            ></textarea>
+          </label>
+        </div>
 
-        <label class="consent-row">
-          <input type="checkbox" name="processingConsent" required />
-          <span>{t(content.legal.consents.processing, locale)}</span>
-        </label>
+        <div class="booking-form__group booking-consents">
+          <label class="consent-row">
+            <input type="checkbox" name="processingConsent" required />
+            <span>{t(content.legal.consents.processing, locale)}</span>
+          </label>
 
-        <label class="consent-row">
-          <input type="checkbox" name="contactConsent" required />
-          <span>{t(content.legal.consents.contact, locale)}</span>
-        </label>
+          <label class="consent-row">
+            <input type="checkbox" name="contactConsent" required />
+            <span>{t(content.legal.consents.contact, locale)}</span>
+          </label>
+        </div>
 
-        <button class="pill-button booking-submit" type="submit" data-submit-button>
-          <span data-submit-button-label>{t(content.booking.submitLabel, locale)}</span>
-        </button>
-
-        <p class="booking-feedback" data-booking-feedback aria-live="polite"></p>
+        <div class="booking-form__group">
+          <button class="button button--primary booking-submit" type="submit" data-submit-button>
+            <span data-submit-button-label>{submitLabel}</span>
+          </button>
+          <p class="booking-feedback" data-booking-feedback aria-live="polite"></p>
+        </div>
       </form>
     </div>
   </div>
@@ -177,7 +257,6 @@ const groupedServices = Array.from(
   type CalendarDay = {
     offset: number;
     iso: string;
-    weekdayIndex: number;
     date: Date;
     disabled: boolean;
     fullyBooked: boolean;
@@ -238,7 +317,6 @@ const groupedServices = Array.from(
       return {
         offset,
         iso: toIsoDate(date),
-        weekdayIndex: date.getDay(),
         date,
         disabled: blocked || closed || fullyBooked,
         fullyBooked,
@@ -280,28 +358,37 @@ const groupedServices = Array.from(
     return locale === "pl" ? "Wybierz date i godzine." : "Please choose a date and time.";
   }
 
-  function applyRequestedService(serviceSelect: Element | null) {
-    if (!(serviceSelect instanceof HTMLSelectElement)) return;
+  function setFeedback(feedback: Element | null, state: FeedbackState, message: string) {
+    if (!(feedback instanceof HTMLElement)) return;
 
-    const requestedService = new URL(window.location.href).searchParams.get("service");
-    if (!requestedService) return;
+    feedback.dataset.state = state;
+    feedback.textContent = message;
+  }
 
-    const matchingOption = serviceSelect.querySelector(`option[value="${requestedService}"]`);
-    if (matchingOption instanceof HTMLOptionElement) {
-      serviceSelect.value = requestedService;
+  function setSubmittingState(form: HTMLFormElement, isSubmitting: boolean) {
+    const submitButton = form.querySelector("[data-submit-button]");
+    const submitButtonLabel = form.querySelector("[data-submit-button-label]");
+
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = isSubmitting;
+    }
+
+    if (submitButtonLabel instanceof HTMLElement) {
+      submitButtonLabel.textContent = isSubmitting
+        ? form.dataset.submittingLabel ?? ""
+        : form.dataset.submitLabel ?? "";
     }
   }
 
   function buildMessage(form: HTMLFormElement, formData: FormData, locale: BookingLocale) {
     const labels = getFieldLabels(locale);
-    const serviceSelect = form.querySelector("select[name='service']");
+    const selectedService = form.querySelector("input[name='service']:checked");
     const serviceLabel =
-      serviceSelect instanceof HTMLSelectElement
-        ? serviceSelect.selectedOptions[0]?.textContent?.trim() ?? ""
-        : "";
+      selectedService instanceof HTMLInputElement ? selectedService.dataset.serviceName ?? "" : "";
 
     const lines = [
       form.dataset.messageIntro ?? "",
+      "",
       `${labels.service}: ${serviceLabel}`,
       `${labels.name}: ${String(formData.get("name") ?? "")}`,
       `${labels.email}: ${String(formData.get("email") ?? "")}`,
@@ -332,33 +419,71 @@ const groupedServices = Array.from(
     return `https://wa.me/${form.dataset.whatsapp}?text=${message}`;
   }
 
-  function setFeedback(feedback: Element | null, state: FeedbackState, message: string) {
-    if (!(feedback instanceof HTMLElement)) return;
-
-    feedback.dataset.state = state;
-    feedback.textContent = message;
+  function updateServiceVisualState(form: HTMLFormElement) {
+    form.querySelectorAll(".service-option").forEach((option) => {
+      const input = option.querySelector("input[name='service']");
+      option.classList.toggle(
+        "is-selected",
+        input instanceof HTMLInputElement && input.checked,
+      );
+    });
   }
 
-  function setSubmittingState(form: HTMLFormElement, isSubmitting: boolean) {
-    const submitButton = form.querySelector("[data-submit-button]");
-    const submitButtonLabel = form.querySelector("[data-submit-button-label]");
+  function updateChannelVisualState(form: HTMLFormElement) {
+    form.querySelectorAll(".channel-card").forEach((card) => {
+      const input = card.querySelector("input[name='channel']");
+      card.classList.toggle(
+        "is-selected",
+        input instanceof HTMLInputElement && input.checked,
+      );
+    });
+  }
 
-    if (submitButton instanceof HTMLButtonElement) {
-      submitButton.disabled = isSubmitting;
+  function activateServiceGroup(form: HTMLFormElement, key: string) {
+    form.querySelectorAll("[data-service-tab]").forEach((tab) => {
+      if (!(tab instanceof HTMLButtonElement)) return;
+      const isActive = tab.dataset.serviceTab === key;
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+
+    form.querySelectorAll("[data-service-group]").forEach((group) => {
+      if (!(group instanceof HTMLElement)) return;
+      const isActive = group.dataset.serviceGroup === key;
+      group.classList.toggle("is-active", isActive);
+    });
+
+    const checkedInGroup = form.querySelector(
+      `[data-service-group="${key}"] input[name='service']:checked`,
+    );
+    const firstInput = form.querySelector(
+      `[data-service-group="${key}"] input[name='service']`,
+    );
+
+    if (!(checkedInGroup instanceof HTMLInputElement) && firstInput instanceof HTMLInputElement) {
+      firstInput.checked = true;
     }
 
-    if (submitButtonLabel instanceof HTMLElement) {
-      submitButtonLabel.textContent = isSubmitting
-        ? form.dataset.submittingLabel ?? ""
-        : form.dataset.submitLabel ?? "";
+    updateServiceVisualState(form);
+  }
+
+  function applyRequestedService(form: HTMLFormElement) {
+    const requestedService = new URL(window.location.href).searchParams.get("service");
+    if (!requestedService) return;
+
+    const input = form.querySelector(`input[name='service'][value="${requestedService}"]`);
+    if (!(input instanceof HTMLInputElement)) return;
+
+    input.checked = true;
+    const key = input.dataset.serviceOptionInput ?? "";
+    if (key) {
+      activateServiceGroup(form, key);
     }
   }
 
   bookingForms.forEach((form) => {
     if (!(form instanceof HTMLFormElement)) return;
 
-    const serviceSelect = form.querySelector("select[name='service']");
-    applyRequestedService(serviceSelect);
     const locale = form.dataset.locale === "en" ? "en" : "pl";
     const calendarConfig = parseCalendarConfig(form);
     const calendarDays = buildCalendarDays(calendarConfig);
@@ -371,6 +496,31 @@ const groupedServices = Array.from(
 
     let selectedDate = "";
     let selectedTime = "";
+
+    const firstTab = form.querySelector("[data-service-tab]");
+    if (firstTab instanceof HTMLButtonElement && firstTab.dataset.serviceTab) {
+      activateServiceGroup(form, firstTab.dataset.serviceTab);
+    }
+
+    applyRequestedService(form);
+    updateChannelVisualState(form);
+
+    form.querySelectorAll("[data-service-tab]").forEach((tab) => {
+      if (!(tab instanceof HTMLButtonElement)) return;
+
+      tab.addEventListener("click", () => {
+        if (!tab.dataset.serviceTab) return;
+        activateServiceGroup(form, tab.dataset.serviceTab);
+      });
+    });
+
+    form.querySelectorAll("input[name='service']").forEach((input) => {
+      input.addEventListener("change", () => updateServiceVisualState(form));
+    });
+
+    form.querySelectorAll("input[name='channel']").forEach((input) => {
+      input.addEventListener("change", () => updateChannelVisualState(form));
+    });
 
     function setDateSummary() {
       if (!(dateSummary instanceof HTMLElement)) return;
@@ -415,7 +565,6 @@ const groupedServices = Array.from(
         if (busy) {
           button.disabled = true;
           button.dataset.state = "busy";
-          button.setAttribute("aria-label", `${slot} ${calendarConfig.labels.unavailable[locale]}`);
         } else {
           if (slot === selectedTime) {
             button.classList.add("is-selected");
