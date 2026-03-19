@@ -37,7 +37,13 @@ const featureIcons = [
         }
       </div>
 
-      <ul class="experience-highlights" data-reveal style="--reveal-delay:0.3s;">
+      <ul class="experience-badges" data-reveal style="--reveal-delay:0.3s;">
+        {
+          content.hero.badges.map((item) => <li>{t(item, locale)}</li>)
+        }
+      </ul>
+
+      <ul class="experience-highlights" data-reveal style="--reveal-delay:0.4s;">
         {
           content.experience.highlights.map((item) => <li>{t(item, locale)}</li>)
         }
